@@ -6,13 +6,13 @@ Hey there! Thanks for wanting to contribute to PDF Reader Pro. Whether it's a bu
 
 ### Found a Bug?
 
-1. Search [existing issues](https://github.com/ahmmedrejowan/PdfReaderPro/issues) first - maybe it's already reported
+1. Search [existing issues](https://github.com/cnnetworkoff/PdfReaderPro/issues) first - maybe it's already reported
 2. If not, open a new issue using the Bug Report template
 3. The more details you provide, the easier it is to fix!
 
 ### Have an Idea?
 
-We love hearing new ideas! Share them in [Discussions](https://github.com/ahmmedrejowan/PdfReaderPro/discussions/categories/ideas) or open a Feature Request issue.
+We love hearing new ideas! Share them in [Discussions](https://github.com/cnnetworkoff/PdfReaderPro/discussions/categories/ideas) or open a Feature Request issue.
 
 ### Want to Code?
 
@@ -34,7 +34,7 @@ Don't worry about getting everything perfect - we can work through it together i
 
 **Quick start:**
 ```bash
-git clone https://github.com/ahmmedrejowan/PdfReaderPro.git
+git clone https://github.com/cnnetworkoff/PdfReaderPro.git
 cd PdfReaderPro
 ./gradlew assembleDebug
 ```
@@ -56,7 +56,7 @@ But don't stress too much about this - we can always squash and clean up commits
 ## Project Structure
 
 ```
-app/src/main/java/com/rejowan/pdfreaderpro/
+app/src/main/java/com/pdfreader/cn/
 ├── data/            # Database, repositories
 ├── domain/          # Models, interfaces
 ├── presentation/    # UI (screens, components, viewmodels)
@@ -65,9 +65,9 @@ app/src/main/java/com/rejowan/pdfreaderpro/
 
 ## Questions?
 
-- Need help? Ask in [Discussions Q&A](https://github.com/ahmmedrejowan/PdfReaderPro/discussions/categories/q-a)
-- Found a bug? Open an [Issue](https://github.com/ahmmedrejowan/PdfReaderPro/issues)
-- Have an idea? Share in [Discussions](https://github.com/ahmmedrejowan/PdfReaderPro/discussions/categories/ideas)
+- Need help? Ask in [Discussions Q&A](https://github.com/cnnetworkoff/PdfReaderPro/discussions/categories/q-a)
+- Found a bug? Open an [Issue](https://github.com/cnnetworkoff/PdfReaderPro/issues)
+- Have an idea? Share in [Discussions](https://github.com/cnnetworkoff/PdfReaderPro/discussions/categories/ideas)
 
 ---
 

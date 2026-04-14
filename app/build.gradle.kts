@@ -16,15 +16,15 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace = "com.rejowan.pdfreaderpro"
+    namespace = "com.pdfreader.cn"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.rejowan.pdfreaderpro"
+        applicationId = "com.pdfreader.cn"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 6
-        versionName = "2.1.3"
+        versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

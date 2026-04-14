@@ -21,13 +21,13 @@
 #-renamesourcefileattribute SourceFile
 
 # PDF Viewer - WebView JavaScript interface
--keepclassmembers class com.rejowan.pdfreaderpro.presentation.components.pdf.WebInterface {
+-keepclassmembers class com.pdfreader.cn.presentation.components.pdf.WebInterface {
    public *;
 }
 
 # PDF Viewer - Exception classes
--keep class com.rejowan.pdfreaderpro.presentation.components.pdf.PdfException
--keep class * extends com.rejowan.pdfreaderpro.presentation.components.pdf.PdfException
+-keep class com.pdfreader.cn.presentation.components.pdf.PdfException
+-keep class * extends com.pdfreader.cn.presentation.components.pdf.PdfException
 
 # ==========================================
 # Logging - Strip in release builds
@@ -93,10 +93,10 @@
 }
 
 # Keep serializable classes
--keep,includedescriptorclasses class com.rejowan.pdfreaderpro.**$$serializer { *; }
--keepclassmembers class com.rejowan.pdfreaderpro.** {
+-keep,includedescriptorclasses class com.pdfreader.cn.**$$serializer { *; }
+-keepclassmembers class com.pdfreader.cn.** {
     *** Companion;
 }
--keepclasseswithmembers class com.rejowan.pdfreaderpro.** {
+-keepclasseswithmembers class com.pdfreader.cn.** {
     kotlinx.serialization.KSerializer serializer(...);
 }

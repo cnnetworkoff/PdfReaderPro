@@ -1,0 +1,26 @@
+Categories:
+  - Reading
+License: GPL-3.0-only
+AuthorName: K M Rejowan Ahmmed
+AuthorEmail: cnnetwork332@gmail.com
+SourceCode: https://github.com/cnnetworkoff/PdfReaderPro
+IssueTracker: https://github.com/cnnetworkoff/PdfReaderPro/issues
+Changelog: https://github.com/cnnetworkoff/PdfReaderPro/blob/master/CHANGELOG.md
+
+AutoName: PDF Reader Pro
+
+RepoType: git
+Repo: https://github.com/cnnetworkoff/PdfReaderPro.git
+
+Builds:
+  - versionName: 1.0.0
+    versionCode: 6
+    commit: 72645a976239a10f8464c72cf2bc7b3badefb967
+    subdir: app
+    gradle:
+      - yes
+
+AutoUpdateMode: Version
+UpdateCheckMode: Tags ^v[0-9.]+$
+CurrentVersion: 1.0.0
+CurrentVersionCode: 6

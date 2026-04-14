@@ -109,7 +109,7 @@ This document lists known issues and limitations in PDF Reader Pro, along with w
 
 If you encounter an issue not listed here, please report it:
 
-1. **Check existing issues:** [GitHub Issues](https://github.com/ahmmedrejowan/PdfReaderPro/issues)
+1. **Check existing issues:** [GitHub Issues](https://github.com/cnnetworkoff/PdfReaderPro/issues)
 2. **Create a new issue** with:
    - Device model and Android version
    - App version

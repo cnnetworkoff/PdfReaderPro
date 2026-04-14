@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/logo.png" alt="PDF Reader Pro Logo" width="120" height="120">
+  <img src="https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/logo.png" alt="PDF Reader Pro Logo" width="120" height="120">
 
 <h3>Modern PDF Viewer for Android</h3>
 
@@ -33,15 +33,15 @@
 
 ## Download
 
-![GitHub Release](https://img.shields.io/github/v/release/ahmmedrejowan/PdfReaderPro)
+![GitHub Release](https://img.shields.io/github/v/release/cnnetworkoff/PdfReaderPro)
 
 You can download the latest APK from here
 
-<a href="https://github.com/ahmmedrejowan/PdfReaderPro/releases/latest">
-<img src="https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/get.png" width="224px" align="center"/>
+<a href="https://github.com/cnnetworkoff/PdfReaderPro/releases/latest">
+<img src="https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/get.png" width="224px" align="center"/>
 </a>
 
-Check out the [releases](https://github.com/ahmmedrejowan/PdfReaderPro/releases) section for more details.
+Check out the [releases](https://github.com/cnnetworkoff/PdfReaderPro/releases) section for more details.
 
 ---
 
@@ -49,15 +49,15 @@ Check out the [releases](https://github.com/ahmmedrejowan/PdfReaderPro/releases)
 
 | Shots | Shots | Shots |
 |-------|-------|-------|
-| ![Screenshot 1](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot1.webp) | ![Screenshot 2](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot2.webp) | ![Screenshot 3](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot3.webp) |
-| ![Screenshot 4](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot4.webp) | ![Screenshot 5](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot5.webp) | ![Screenshot 6](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot6.webp) |
-| ![Screenshot 7](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot7.webp) | ![Screenshot 8](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot8.webp) | ![Screenshot 9](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot9.webp) |
-| ![Screenshot 10](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot10.webp) | ![Screenshot 11](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot11.webp) | ![Screenshot 12](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot12.webp) |
-| ![Screenshot 13](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot13.webp) | ![Screenshot 14](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot14.webp) | ![Screenshot 15](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot15.webp) |
-| ![Screenshot 16](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot16.webp) | ![Screenshot 17](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot17.webp) | ![Screenshot 18](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot18.webp) |
-| ![Screenshot 19](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot19.webp) | ![Screenshot 20](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot20.webp) | ![Screenshot 21](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot21.webp) |
-| ![Screenshot 22](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot22.webp) | ![Screenshot 23](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot23.webp) | ![Screenshot 24](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot24.webp) |
-| ![Screenshot 25](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot25.webp) | ![Screenshot 26](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot26.webp) | ![Screenshot 27](https://raw.githubusercontent.com/ahmmedrejowan/PdfReaderPro/master/files/shot27.webp) |
+| ![Screenshot 1](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot1.webp) | ![Screenshot 2](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot2.webp) | ![Screenshot 3](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot3.webp) |
+| ![Screenshot 4](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot4.webp) | ![Screenshot 5](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot5.webp) | ![Screenshot 6](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot6.webp) |
+| ![Screenshot 7](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot7.webp) | ![Screenshot 8](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot8.webp) | ![Screenshot 9](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot9.webp) |
+| ![Screenshot 10](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot10.webp) | ![Screenshot 11](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot11.webp) | ![Screenshot 12](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot12.webp) |
+| ![Screenshot 13](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot13.webp) | ![Screenshot 14](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot14.webp) | ![Screenshot 15](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot15.webp) |
+| ![Screenshot 16](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot16.webp) | ![Screenshot 17](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot17.webp) | ![Screenshot 18](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot18.webp) |
+| ![Screenshot 19](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot19.webp) | ![Screenshot 20](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot20.webp) | ![Screenshot 21](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot21.webp) |
+| ![Screenshot 22](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot22.webp) | ![Screenshot 23](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot23.webp) | ![Screenshot 24](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot24.webp) |
+| ![Screenshot 25](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot25.webp) | ![Screenshot 26](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot26.webp) | ![Screenshot 27](https://raw.githubusercontent.com/cnnetworkoff/PdfReaderPro/master/files/shot27.webp) |
 
 ---
 
@@ -133,7 +133,7 @@ To build and run the project, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/ahmmedrejowan/PdfReaderPro.git
+   git clone https://github.com/cnnetworkoff/PdfReaderPro.git
    ```
 2. Open the project in Android Studio.
 3. Sync the project with Gradle files.
@@ -191,9 +191,9 @@ GNU General Public License for more details.
 
 ## Community
 
-- [Discussions](https://github.com/ahmmedrejowan/PdfReaderPro/discussions) - Ask questions, share ideas
-- [Issues](https://github.com/ahmmedrejowan/PdfReaderPro/issues) - Report bugs, request features
-- [Releases](https://github.com/ahmmedrejowan/PdfReaderPro/releases) - Download latest versions
+- [Discussions](https://github.com/cnnetworkoff/PdfReaderPro/discussions) - Ask questions, share ideas
+- [Issues](https://github.com/cnnetworkoff/PdfReaderPro/issues) - Report bugs, request features
+- [Releases](https://github.com/cnnetworkoff/PdfReaderPro/releases) - Download latest versions
 
 ---
 
@@ -201,8 +201,8 @@ GNU General Public License for more details.
 
 **K M Rejowan Ahmmed**
 
-- GitHub: [@ahmmedrejowan](https://github.com/ahmmedrejowan)
-- Email: [kmrejowan@gmail.com](mailto:kmrejowan@gmail.com)
+- GitHub: [@cnnetworkoff](https://github.com/cnnetworkoff)
+- Email: [cnnetwork332@gmail.com](mailto:cnnetwork332@gmail.com)
 
 ---
 
