@@ -26,7 +26,7 @@ koin = "4.2.0"
 koinCompose = "4.2.0"
 
 # Kotlin Serialization
-kotlinxSerialization = "1.10.0"
+kotlinxSerialization = "1.11.0"
 
 # Ktor HTTP Client
 ktor = "3.4.2"
