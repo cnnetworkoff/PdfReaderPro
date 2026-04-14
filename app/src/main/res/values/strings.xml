@@ -605,8 +605,8 @@
     <string name="no_matches_message">We couldn\'t find anything for \"%s\". Try a different search term.</string>
     <string name="no_folders_title">No folders yet</string>
     <string name="no_folders_message">PDF folders will appear here once your files are scanned. Let\'s find them!</string>
-    <string name="permission_title">We need your permission</string>
-    <string name="permission_message">To show your PDF files here, please allow access to your storage</string>
+    <string name="permission_title">Manage PDFs across your device</string>
+    <string name="permission_message">Allow all files access to scan, organize, rename, delete, and open PDF files across device folders. You can still use picker-based flows without granting it.</string>
 
     <!-- Stats Sheet -->
     <string name="library_stats">Library Stats</string>
@@ -689,10 +689,13 @@
     <string name="days_ago">%dd ago</string>
 
     <!-- Permission Bottom Sheet -->
-    <string name="quick_access_needed">Quick access needed</string>
-    <string name="storage_access_message">Allow storage access so we can find and display your PDF files</string>
+    <string name="quick_access_needed">Optional device-wide PDF access</string>
+    <string name="storage_access_message">Enable all files access if you want PDF Reader Pro to automatically discover and manage PDF files across your device folders. Without it, you can still open files you choose manually.</string>
     <string name="open_settings">Open Settings</string>
     <string name="not_now">Not now</string>
+    <string name="continue_action">Continue</string>
+    <string name="start_using_app">Start Using App</string>
+    <string name="enable_device_wide_pdf_access">Enable device-wide PDF access</string>
 
     <!-- Error Activity -->
     <string name="unexpected_error">An unexpected error occurred</string>
@@ -1019,7 +1022,7 @@
     <string name="privacy_local_storage_title">Local Data Storage</string>
     <string name="privacy_local_storage_content">All bookmarks, favorites, and app preferences are stored exclusively on your device. This data never leaves your device and is not accessible to anyone except you. You have complete control and can delete this data at any time.</string>
     <string name="privacy_file_access_title">File Access</string>
-    <string name="privacy_file_access_content">PDF Reader Pro requires storage permission to read PDF files from your device. This access is used solely to display your documents and is never used to collect or transmit any information.</string>
+    <string name="privacy_file_access_content">PDF Reader Pro may request broad file access so it can automatically locate, open, organize, rename, delete, and manage PDF files across device folders. This access is used for on-device document management and is not used for advertising or behavioral tracking.</string>
     <string name="privacy_password_title">Password Storage</string>
     <string name="privacy_password_content">If you choose to save passwords for protected PDFs, they are stored locally using encrypted storage. Passwords never leave your device.</string>
     <string name="privacy_update_title">Update Checking</string>

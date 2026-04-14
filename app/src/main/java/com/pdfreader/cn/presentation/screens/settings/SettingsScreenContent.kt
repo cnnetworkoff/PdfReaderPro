@@ -131,9 +131,9 @@ import com.pdfreader.cn.presentation.components.DownloadProgressSheet
 import com.pdfreader.cn.presentation.components.UpdateAvailableSheet
 import com.pdfreader.cn.util.ApkDownloadManager
 import com.pdfreader.cn.util.Constants
-import com.pdfreader.licensy.LicenseContent
-import com.pdfreader.licensy.Licenses
-import com.pdfreader.licensy.compose.LicensyList
+import com.rejowan.licensy.LicenseContent
+import com.rejowan.licensy.Licenses
+import com.rejowan.licensy.compose.LicensyList
 import kotlinx.coroutines.delay
 import org.koin.androidx.compose.koinViewModel
 

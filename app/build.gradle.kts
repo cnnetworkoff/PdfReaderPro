@@ -53,6 +53,9 @@ android {
         debug {
             // Debug builds enable logging
             buildConfigField("boolean", "ENABLE_LOGGING", "true")
+            if (keystorePropertiesFile.exists() || System.getenv("KEYSTORE_FILE") != null) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
         release {
             isMinifyEnabled = true

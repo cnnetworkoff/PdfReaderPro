@@ -191,6 +191,18 @@ GNU General Public License for more details.
 
 This fork is maintained by `cnnetworkoff`. Original copyright and license notices are preserved under GPL-3.0.
 
+### Fork Change Notice
+
+This repository is a modified version of the upstream GPL-3.0 project.
+Recent downstream changes in this fork include:
+
+- hosted project site and privacy policy for store distribution
+- updated permission disclosures for broad device-wide PDF management access
+- onboarding/startup flow changes so full file access is optional instead of a hard launch requirement
+- local signing configuration updates for using the same signing key in debug and release builds
+
+Changed files should remain clearly marked in Git history and downstream notices.
+
 > **Warning**
 > This is a copyleft license. Any derivative work must also be open source under the same license.
 

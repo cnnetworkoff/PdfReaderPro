@@ -703,19 +703,16 @@ fun OnboardingScreen(
                                             popUpTo(0) { inclusive = true }
                                         }
                                     } else {
-                                        waitingForManagePermission = true
-                                        val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION).apply {
-                                            data = Uri.parse("package:${context.packageName}")
+                                        onOnboardingComplete()
+                                        navController.navigate(Home) {
+                                            popUpTo(0) { inclusive = true }
                                         }
-                                        context.startActivity(intent)
                                     }
                                 } else {
-                                    legacyPermissionLauncher.launch(
-                                        arrayOf(
-                                            Manifest.permission.READ_EXTERNAL_STORAGE,
-                                            Manifest.permission.WRITE_EXTERNAL_STORAGE
-                                        )
-                                    )
+                                    onOnboardingComplete()
+                                    navController.navigate(Home) {
+                                        popUpTo(0) { inclusive = true }
+                                    }
                                 }
                             } else {
                                 scope.launch {
@@ -737,7 +734,7 @@ fun OnboardingScreen(
                         )
                     ) {
                         Text(
-                            text = if (isLastPage) "Grant Access" else "Continue",
+                            text = if (isLastPage) stringResource(R.string.start_using_app) else stringResource(R.string.continue_action),
                             fontSize = 16.sp,
                             fontWeight = FontWeight.SemiBold
                         )
@@ -747,6 +744,34 @@ fun OnboardingScreen(
                                 imageVector = Icons.AutoMirrored.Rounded.ArrowForward,
                                 contentDescription = stringResource(R.string.cd_decorative),
                                 modifier = Modifier.size(20.dp)
+                            )
+                        }
+                    }
+
+                    if (isLastPage) {
+                        Spacer(modifier = Modifier.height(12.dp))
+                        TextButton(
+                            onClick = {
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                                    waitingForManagePermission = true
+                                    val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION).apply {
+                                        data = Uri.parse("package:${context.packageName}")
+                                    }
+                                    context.startActivity(intent)
+                                } else {
+                                    legacyPermissionLauncher.launch(
+                                        arrayOf(
+                                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                                        )
+                                    )
+                                }
+                            }
+                        ) {
+                            Text(
+                                text = stringResource(R.string.enable_device_wide_pdf_access),
+                                color = currentAccentColor,
+                                fontWeight = FontWeight.Medium
                             )
                         }
                     }
