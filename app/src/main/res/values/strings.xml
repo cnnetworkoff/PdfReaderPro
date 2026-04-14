@@ -878,7 +878,7 @@
     <string name="document_title">Title</string>
     <string name="author">Author</string>
     <string name="subject">Subject</string>
-    <string name="creator">Creator</string>
+    <string name="creator">Fork Maintainer</string>
     <string name="producer">Producer</string>
     <string name="creation_date">Creation Date</string>
     <string name="modification_date">Modification Date</string>
@@ -932,7 +932,7 @@
     <string name="license_gpl">GPL 3.0</string>
     <string name="latest_badge">LATEST</string>
     <string name="privacy_protected">Your Privacy is Protected</string>
-    <string name="about_app_description">This GPL-3.0 fork of PDF Reader Pro is maintained by cnnetworkoff. It keeps the original open-source license terms while continuing to provide a privacy-focused PDF reading experience for Android users.</string>
+    <string name="about_app_description">This GPL-3.0 fork of PDF Reader Pro is maintained by cnnetworkoff. Original author notices are preserved, and this fork clearly marks its changes while continuing the privacy-focused Android PDF reader project.</string>
     <string name="gpl_full_name">GNU General Public License v3.0</string>
     <string name="key_terms">Key Terms</string>
     <string name="view_gpl_license">View Full GPL v3.0 License</string>
@@ -948,17 +948,17 @@
     <string name="view_changelog">View changelog</string>
     <string name="view_privacy_policy">View our privacy policy</string>
     <string name="view_third_party">View third-party libraries</string>
-    <string name="about_developer">About the developer</string>
-    <string name="app_license">App License</string>
+    <string name="about_developer">Fork and maintainer details</string>
+    <string name="app_license">GPL License and Fork Notice</string>
     <string name="follow_system_brightness">Follow system brightness</string>
 
     <!-- Settings Screen - Remaining strings -->
     <string name="install_pending_update">Install Pending Update</string>
     <string name="install_downloaded_version">Install downloaded v%s</string>
-    <string name="contact_developer">Contact Developer</string>
-    <string name="get_in_touch">Get in touch with the developer</string>
+    <string name="contact_developer">Contact Maintainer</string>
+    <string name="get_in_touch">Get in touch with the maintainer</string>
     <string name="github_repository">GitHub Repository</string>
-    <string name="view_source_code">View source code</string>
+    <string name="view_source_code">View source code at github.com/cnnetworkoff/PdfReaderPro</string>
     <string name="choose_appearance">Choose app appearance</string>
     <string name="always_light">Always use light theme</string>
     <string name="always_dark">Always use dark theme</string>
@@ -1029,7 +1029,7 @@
     <string name="gpl_freedom_distribute">Freedom to distribute copies</string>
     <string name="gpl_freedom_modify">Freedom to distribute modified versions</string>
     <string name="gpl_derivative">Derivative works must be open source under GPL v3.0</string>
-    <string name="gpl_notice">PDF Reader Pro - Open Source PDF Viewer\nCopyright (C) %d K M Rejowan Ahmmed\nModified fork maintained by cnnetworkoff.\n\nThis program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</string>
+    <string name="gpl_notice">PDF Reader Pro - Open Source PDF Viewer\nCopyright (C) %d K M Rejowan Ahmmed\nModified fork maintained by cnnetworkoff.\nRepository: github.com/cnnetworkoff/PdfReaderPro\n\nThis program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\n\nThis modified version clearly states its changes and remains distributed without ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</string>
 
     <!-- Onboarding -->
     <string name="onboarding_welcome">Welcome to\nPDF Reader Pro</string>
