@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Privacy Policy - PDF Reader Pro</title>
-  <meta name="description" content="Privacy policy for PDF Reader Pro by cnnetworkoff.">
+  <meta name="description" content="Detailed privacy policy for PDF Reader Pro by cnnetworkoff.">
   <style>
     :root {
       --bg: #f8f6ef;
@@ -12,17 +12,21 @@
       --ink: #1f2d2a;
       --muted: #5b6b65;
       --accent: #146356;
+      --accent-soft: rgba(20, 99, 86, 0.08);
       --line: rgba(20, 99, 86, 0.16);
     }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: Georgia, "Times New Roman", serif;
-      background: linear-gradient(180deg, #fdfcf8, var(--bg));
+      background:
+        radial-gradient(circle at top left, rgba(20, 99, 86, 0.10), transparent 28%),
+        linear-gradient(180deg, #fdfcf8, var(--bg));
       color: var(--ink);
     }
     main {
-      max-width: 860px;
+      max-width: 920px;
       margin: 0 auto;
       padding: 32px 20px 56px;
     }
@@ -33,9 +37,32 @@
       padding: 32px;
       box-shadow: 0 16px 42px rgba(31, 45, 42, 0.08);
     }
+    h1, h2, h3 { color: var(--ink); }
     h1, h2 { margin-top: 0; }
-    p, li { color: var(--muted); line-height: 1.7; }
+    h2 {
+      margin-top: 32px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    h3 { margin-bottom: 10px; }
+    p, li {
+      color: var(--muted);
+      line-height: 1.72;
+    }
+    ul { padding-left: 20px; }
     a { color: var(--accent); }
+    .meta, .summary {
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: var(--accent-soft);
+      border: 1px solid var(--line);
+    }
+    .meta p, .summary p, .summary li { margin: 0.45em 0; }
+    .small { font-size: 0.95rem; }
+    @media (max-width: 640px) {
+      article { padding: 24px 18px; border-radius: 18px; }
+      main { padding: 20px 14px 40px; }
+    }
   </style>
 </head>
 <body>
@@ -43,43 +70,223 @@
     <article>
       <p><a href="./">Back to project site</a></p>
       <h1>Privacy Policy</h1>
-      <p><strong>Last updated:</strong> 2026-04-14</p>
+      <div class="meta small">
+        <p><strong>Last updated:</strong> 2026-04-14</p>
+        <p><strong>App name:</strong> PDF Reader Pro</p>
+        <p><strong>Package name:</strong> <code>com.pdfreader.cn</code></p>
+        <p><strong>Publisher / maintainer:</strong> cnnetworkoff</p>
+      </div>
+
       <p>
-        PDF Reader Pro is maintained by cnnetworkoff. This page applies to the
-        Play Store distribution of the app package <strong>com.pdfreader.cn</strong>.
+        This Privacy Policy explains how PDF Reader Pro ("the app", "we", "us", or "our")
+        handles information when you install and use the Android application and this project
+        website. This policy is intended to provide a public, stable privacy notice for users,
+        store reviewers, and distribution platforms.
       </p>
 
-      <h2>Data Collection</h2>
+      <div class="summary">
+        <p><strong>Short version:</strong></p>
+        <ul>
+          <li>Your PDF files are processed primarily on your device.</li>
+          <li>We do not sell personal information.</li>
+          <li>We do not include advertising SDKs.</li>
+          <li>We do not include third-party analytics or behavioral tracking SDKs.</li>
+          <li>The app may use network access for update checks, opening web links, and optional online or network PDF access paths supported by the app.</li>
+          <li>Recent files, favorites, bookmarks, annotations, preferences, and optional saved PDF passwords are stored locally on your device.</li>
+        </ul>
+      </div>
+
+      <h2>1. Scope</h2>
       <p>
-        PDF Reader Pro does not collect, store, transmit, sell, or share personal data.
-        The app does not include analytics, advertising SDKs, or tracking systems.
+        This policy applies to:
+      </p>
+      <ul>
+        <li>The Android app PDF Reader Pro distributed under the package name <code>com.pdfreader.cn</code>.</li>
+        <li>The project website hosted at <code>cnnetworkoff.github.io/PdfReaderPro</code>, including this privacy page.</li>
+      </ul>
+
+      <h2>2. Information We Process</h2>
+      <h3>2.1 Information processed on your device</h3>
+      <p>
+        To provide PDF reading and PDF tool features, the app may process content and metadata
+        from files you choose to open or manage. Depending on how you use the app, this can include:
+      </p>
+      <ul>
+        <li>PDF files and other selected source files.</li>
+        <li>File names, file paths, folder names, file sizes, modification times, and related document metadata.</li>
+        <li>Your reading progress, such as recently opened files and last viewed page.</li>
+        <li>Your saved favorites, bookmarks, annotations, and interface preferences.</li>
+        <li>Optional passwords you choose to save for password-protected PDF files.</li>
+      </ul>
+
+      <h3>2.2 Information we do not intentionally collect as an online service</h3>
+      <p>
+        Based on the current codebase, the app does not include advertising SDKs, mobile analytics
+        SDKs, crash reporting SDKs, or behavioral tracking SDKs. We do not operate a user account
+        system for the app, and we do not require you to create an account to read or manage PDFs.
       </p>
 
-      <h2>Files and Local Data</h2>
+      <h2>3. How the App Uses Information</h2>
       <p>
-        The app accesses PDF files you choose to open or browse on your device.
-        Bookmarks, favorites, and app preferences are stored locally on your device.
-        Passwords for protected PDFs, if you choose to save them, remain stored locally
-        using encrypted storage.
+        Information processed by the app is used to provide core functionality, including:
+      </p>
+      <ul>
+        <li>Finding and displaying PDF files stored on your device or provided through Android share/open actions.</li>
+        <li>Opening, viewing, searching, navigating, and rendering documents.</li>
+        <li>Saving recent items, favorites, bookmarks, annotations, and reading preferences.</li>
+        <li>Supporting PDF editing and utility features such as merge, split, compression, reordering, locking, unlocking, watermarking, page numbering, and conversion workflows available in the app.</li>
+        <li>Optionally remembering saved passwords for encrypted PDFs when you enable or use that feature.</li>
+        <li>Checking whether a newer app release exists, where that functionality is available in the build you use.</li>
+      </ul>
+
+      <h2>4. Permissions and Device Access</h2>
+      <p>
+        The Android app may request device permissions or equivalent access in order to function.
+        Depending on Android version, device behavior, and build configuration, the app may request or
+        use storage-related access to locate, open, create, modify, export, or organize PDF files.
+      </p>
+      <ul>
+        <li><strong>Storage and file access:</strong> used to discover PDFs on your device and to read, create, edit, export, rename, or delete files you choose to manage with the app.</li>
+        <li><strong>Internet access:</strong> used for limited app features such as checking for updates, opening external links, and any optional online or network resource paths supported by the app.</li>
+      </ul>
+      <p>
+        You can deny permissions, but some app features may not work correctly without the access needed
+        to open and manage documents.
       </p>
 
-      <h2>Network Access</h2>
+      <h2>5. Local Storage on Your Device</h2>
       <p>
-        This Play Store build does not download or install APK updates from inside the app.
-        Updates are delivered through Google Play. Network access may still be used for
-        opening web links or optional online/network PDF access paths supported by the app.
+        The app stores certain data locally on your device so features continue working between sessions.
+        Local storage may include:
+      </p>
+      <ul>
+        <li>Recent files and last opened page information.</li>
+        <li>Favorites.</li>
+        <li>Bookmarks.</li>
+        <li>Annotations and related annotation metadata.</li>
+        <li>App and reader preferences, such as theme, sorting, orientation, and viewing options.</li>
+        <li>Update-check preferences, such as skipped versions and last check time.</li>
+      </ul>
+      <p>
+        Optional saved PDF passwords are stored locally using Android Keystore-backed encryption according
+        to the current implementation. If you do not want passwords stored on your device, do not enable
+        or use password-saving features, or clear them from the app if that option is provided.
       </p>
 
-      <h2>Third Parties</h2>
+      <h2>6. Network Activity and Update Checks</h2>
       <p>
-        PDF Reader Pro is open source software and includes third-party libraries under their
-        respective licenses. License notices are available in the app and repository.
+        PDF Reader Pro is designed to work mainly on-device, but some builds may make limited network
+        requests. Based on the current codebase, those requests can include:
+      </p>
+      <ul>
+        <li>Requests to GitHub's release API to check whether a newer version of the app is available.</li>
+        <li>Opening external links you choose to visit, such as project or support pages.</li>
+        <li>Optional online or network PDF access paths supported by the app or embedded viewer components.</li>
+      </ul>
+      <p>
+        If you install a Play Store build, updates may be delivered through Google Play rather than direct
+        in-app APK installation. Store providers such as Google Play may independently collect data under
+        their own privacy terms. That processing is controlled by the store provider, not by us.
       </p>
 
-      <h2>Contact</h2>
+      <h2>7. Third-Party Services and Libraries</h2>
       <p>
-        For privacy questions, contact
-        <a href="mailto:cnnetwork332@gmail.com">cnnetwork332@gmail.com</a>.
+        The app includes third-party open-source libraries to provide technical functionality such as PDF
+        rendering, document processing, networking, dependency injection, image loading, open-source license
+        display, and user interface features. These libraries are included to make the app function; they are
+        not included for ad targeting or user profiling.
+      </p>
+      <p>
+        When the app contacts an external platform such as GitHub for release checks, that platform may receive
+        technical request data such as IP address, user agent, request time, and standard HTTP metadata as part
+        of normal internet communication. That external processing is governed by the third party's own policies.
+      </p>
+
+      <h2>8. Data Sharing</h2>
+      <p>
+        We do not sell your personal information. We do not rent your personal information. We do not share
+        personal information for cross-context behavioral advertising.
+      </p>
+      <p>
+        We may disclose information only in limited circumstances, such as:
+      </p>
+      <ul>
+        <li>When necessary to comply with applicable law, regulation, legal process, or enforceable government request.</li>
+        <li>When necessary to protect rights, safety, app integrity, or to investigate fraud, abuse, or security issues.</li>
+        <li>When data is transmitted by your own direct use of third-party destinations, such as opening a web page or contacting a store or code-hosting platform.</li>
+      </ul>
+
+      <h2>9. Data Retention</h2>
+      <p>
+        Data stored by the app on your device generally remains there until you delete it, clear the app's
+        storage, uninstall the app, or remove the relevant files, bookmarks, annotations, preferences, or saved
+        passwords through app or system controls. We do not currently operate a centralized user database for
+        routine app usage data based on the current implementation.
+      </p>
+
+      <h2>10. Security</h2>
+      <p>
+        We aim to limit data handling to what is reasonably necessary for app functionality. The app stores its
+        local state on-device, and the current implementation encrypts saved PDF passwords using Android Keystore
+        mechanisms. However, no method of storage, software security, or internet transmission is guaranteed to
+        be completely secure, and you use the app at your own risk.
+      </p>
+
+      <h2>11. Children’s Privacy</h2>
+      <p>
+        PDF Reader Pro is not directed specifically to children under 13, and we do not knowingly collect
+        personal information from children through a dedicated account system or analytics profile system.
+        If you believe a child provided personal information to us directly, contact us so we can review the issue.
+      </p>
+
+      <h2>12. International Use</h2>
+      <p>
+        If you use the app or access this website from outside your home jurisdiction, network requests initiated
+        by your device may be processed in other countries by infrastructure providers or third-party services such
+        as GitHub or Google Play. Local privacy rights and protections may differ by jurisdiction.
+      </p>
+
+      <h2>13. Your Choices and Rights</h2>
+      <p>
+        Depending on your location and applicable law, you may have rights relating to access, deletion, correction,
+        or restriction of personal information. In practical terms for this app, you can usually control data by:
+      </p>
+      <ul>
+        <li>Revoking device permissions.</li>
+        <li>Deleting files, bookmarks, annotations, favorites, or other saved local records.</li>
+        <li>Clearing the app's storage through Android system settings.</li>
+        <li>Uninstalling the app.</li>
+        <li>Avoiding optional features that store local passwords or contact third-party services.</li>
+      </ul>
+      <p>
+        If you contact us with a privacy request, include enough detail for us to understand the request and respond.
+      </p>
+
+      <h2>14. Website Information</h2>
+      <p>
+        This website is hosted using GitHub Pages. If you visit this website, GitHub may process technical access
+        data such as IP address, browser information, request headers, and server logs under GitHub's own terms and
+        privacy policy. We do not control GitHub's infrastructure-level processing.
+      </p>
+
+      <h2>15. Changes to This Policy</h2>
+      <p>
+        We may update this Privacy Policy from time to time to reflect app changes, legal requirements, or accuracy
+        improvements. When we update this policy, we will revise the "Last updated" date on this page. Your continued
+        use of the app after changes become effective means the updated policy will apply going forward.
+      </p>
+
+      <h2>16. Contact</h2>
+      <p>
+        For privacy questions or requests, contact:
+        <a href="mailto:cnnetwork332@gmail.com">cnnetwork332@gmail.com</a>
+      </p>
+
+      <h2>17. Important Security Note</h2>
+      <p>
+        Access tokens, API keys, passwords, and other credentials must never be placed in this privacy policy, in
+        any public webpage, or in source control. If a credential was pasted or exposed accidentally, it should be
+        treated as compromised and rotated or revoked immediately through the relevant provider.
       </p>
     </article>
   </main>
