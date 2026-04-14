@@ -347,50 +347,13 @@ fun SettingsScreenContent(
 
         SettingsOptionItem(
             icon = Icons.Rounded.SystemUpdate,
-            title = stringResource(R.string.check_for_updates),
-            subtitle = when (updateState) {
-                is UpdateState.Idle -> stringResource(R.string.tap_to_check)
-                is UpdateState.Checking -> stringResource(R.string.checking)
-                is UpdateState.Available -> stringResource(R.string.update_available_version, (updateState as UpdateState.Available).release.version)
-                is UpdateState.UpToDate -> stringResource(R.string.up_to_date)
-                is UpdateState.Error -> stringResource(R.string.error_message, (updateState as UpdateState.Error).message)
-            },
+            title = stringResource(R.string.play_store_updates_title),
+            subtitle = stringResource(R.string.play_store_updates_subtitle),
             accentColor = AccentAmber,
-            onClick = { viewModel.checkForUpdates() },
+            onClick = {},
             animationDelay = 550
         )
-
-        // Show pending install option if APK is downloaded
-        if (hasPendingApk) {
-            Spacer(modifier = Modifier.height(8.dp))
-
-            SettingsOptionItem(
-                icon = Icons.Rounded.InstallMobile,
-                title = stringResource(R.string.install_pending_update),
-                subtitle = "v${pendingApkVersion ?: "?"} is ready to install",
-                accentColor = Color(0xFF4CAF50),
-                onClick = {
-                    if (viewModel.canInstallApks()) {
-                        viewModel.installPendingApk()
-                    } else {
-                        // Show download sheet to handle permission
-                        showDownloadSheet = true
-                    }
-                },
-                animationDelay = 560
-            )
-        }
-
         Spacer(modifier = Modifier.height(8.dp))
-
-        SettingsOptionItem(
-            icon = Icons.Rounded.Schedule,
-            title = stringResource(R.string.auto_check_interval),
-            subtitle = preferences.updateCheckInterval.displayName,
-            accentColor = AccentBlue,
-            onClick = { showUpdateIntervalSheet = true },
-            animationDelay = 600
-        )
 
         Spacer(modifier = Modifier.height(24.dp))
 
@@ -657,56 +620,6 @@ fun SettingsScreenContent(
         )
     }
 
-    // Update available sheet
-    if (updateState is UpdateState.Available) {
-        val availableState = updateState as UpdateState.Available
-        UpdateAvailableSheet(
-            release = availableState.release,
-            currentVersion = availableState.currentVersion,
-            downloadUrl = viewModel.getApkDownloadUrl(availableState.release),
-            onDismiss = { viewModel.dismissUpdateDialog() },
-            onSkipVersion = { viewModel.skipVersion(availableState.release.version) },
-            onDownload = {
-                currentRelease = availableState.release
-                viewModel.startDownload(availableState.release)
-                viewModel.dismissUpdateDialog()
-            }
-        )
-    }
-
-    // Download progress sheet
-    if (showDownloadSheet && downloadState !is ApkDownloadManager.DownloadState.Idle) {
-        DownloadProgressSheet(
-            downloadState = downloadState,
-            versionName = currentRelease?.version ?: "",
-            canInstall = viewModel.canInstallApks(),
-            onDismiss = {
-                showDownloadSheet = false
-                // Reset state if completed/failed/cancelled
-                when (downloadState) {
-                    is ApkDownloadManager.DownloadState.Completed,
-                    is ApkDownloadManager.DownloadState.Failed,
-                    is ApkDownloadManager.DownloadState.Cancelled -> {
-                        viewModel.resetDownloadState()
-                    }
-                    else -> {}
-                }
-            },
-            onCancel = {
-                viewModel.cancelDownload()
-            },
-            onInstall = {
-                viewModel.installDownloadedApk()
-                showDownloadSheet = false
-                viewModel.resetDownloadState()
-            },
-            onRequestPermission = {
-                viewModel.openInstallPermissionSettings()?.let { intent ->
-                    context.startActivity(intent)
-                }
-            }
-        )
-    }
 }
 
 @Composable

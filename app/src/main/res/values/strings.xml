@@ -959,6 +959,8 @@
     <string name="get_in_touch">Get in touch with the maintainer</string>
     <string name="github_repository">GitHub Repository</string>
     <string name="view_source_code">View source code at github.com/cnnetworkoff/PdfReaderPro</string>
+    <string name="play_store_updates_title">Updates via Google Play</string>
+    <string name="play_store_updates_subtitle">This Play Store version is updated through Google Play, not direct APK downloads</string>
     <string name="choose_appearance">Choose app appearance</string>
     <string name="always_light">Always use light theme</string>
     <string name="always_dark">Always use dark theme</string>

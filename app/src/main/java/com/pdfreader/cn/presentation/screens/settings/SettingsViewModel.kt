@@ -35,6 +35,7 @@ class SettingsViewModel(
         private const val TAG = "UpdateChecker"
         private const val GITHUB_OWNER = "cnnetworkoff"
         private const val GITHUB_REPO = "PdfReaderPro"
+        private const val PLAY_STORE_DISTRIBUTION = true
     }
 
     val preferences: StateFlow<AppPreferences> = preferencesRepository.preferences
@@ -60,8 +61,10 @@ class SettingsViewModel(
 
     init {
         loadLastCheckTime()
-        checkForUpdatesIfNeeded()
-        checkPendingApk()
+        if (!PLAY_STORE_DISTRIBUTION) {
+            checkForUpdatesIfNeeded()
+            checkPendingApk()
+        }
     }
 
     private fun checkPendingApk() {
@@ -110,6 +113,10 @@ class SettingsViewModel(
     }
 
     fun checkForUpdates() {
+        if (PLAY_STORE_DISTRIBUTION) {
+            _updateState.value = UpdateState.UpToDate
+            return
+        }
         viewModelScope.launch {
             _updateState.value = UpdateState.Checking
             Timber.d("Checking for updates...")
@@ -174,6 +181,10 @@ class SettingsViewModel(
      * Starts downloading the APK for the given release.
      */
     fun startDownload(release: GithubRelease) {
+        if (PLAY_STORE_DISTRIBUTION) {
+            _downloadState.value = ApkDownloadManager.DownloadState.Failed("Play Store builds do not download APK updates directly")
+            return
+        }
         val apkAsset = release.assets.firstOrNull { it.isApk }
         if (apkAsset == null) {
             Timber.tag(TAG).e("No APK asset found in release")
@@ -219,6 +230,7 @@ class SettingsViewModel(
      * Checks if the app has permission to install APKs.
      */
     fun canInstallApks(): Boolean {
+        if (PLAY_STORE_DISTRIBUTION) return false
         return apkDownloadManager.canInstallApks()
     }
 
@@ -226,6 +238,7 @@ class SettingsViewModel(
      * Installs the downloaded APK.
      */
     fun installDownloadedApk(): Boolean {
+        if (PLAY_STORE_DISTRIBUTION) return false
         val file = pendingInstallFile ?: run {
             Timber.tag(TAG).e("No pending install file")
             return false
@@ -237,6 +250,7 @@ class SettingsViewModel(
      * Installs APK from a specific file.
      */
     fun installApk(file: File): Boolean {
+        if (PLAY_STORE_DISTRIBUTION) return false
         return apkDownloadManager.installApk(file)
     }
 
@@ -244,6 +258,7 @@ class SettingsViewModel(
      * Installs the pending APK if one exists.
      */
     fun installPendingApk(): Boolean {
+        if (PLAY_STORE_DISTRIBUTION) return false
         val file = apkDownloadManager.getPendingApk() ?: run {
             Timber.tag(TAG).e("No pending APK found")
             return false
@@ -255,6 +270,7 @@ class SettingsViewModel(
      * Clears the pending APK (deletes downloaded file).
      */
     fun clearPendingApk() {
+        if (PLAY_STORE_DISTRIBUTION) return
         apkDownloadManager.cleanupOldDownloads()
         checkPendingApk()
     }
@@ -263,6 +279,7 @@ class SettingsViewModel(
      * Refreshes pending APK state (call on resume).
      */
     fun refreshPendingApkState() {
+        if (PLAY_STORE_DISTRIBUTION) return
         checkPendingApk()
     }
 
@@ -270,6 +287,7 @@ class SettingsViewModel(
      * Opens the system settings to enable install from unknown sources.
      */
     fun openInstallPermissionSettings(): android.content.Intent? {
+        if (PLAY_STORE_DISTRIBUTION) return null
         return apkDownloadManager.getInstallPermissionIntent()
     }
 
