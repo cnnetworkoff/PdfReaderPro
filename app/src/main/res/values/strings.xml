@@ -227,10 +227,10 @@
     <string name="your_privacy_protected">Your Privacy is Protected</string>
     <string name="last_updated">Last updated: %s</string>
     <string name="open_source_licenses">Open Source Licenses</string>
-    <string name="about_creator">About the Creator</string>
-    <string name="creator_name">K M Rejowan Ahmmed</string>
-    <string name="creator_title">Senior Android Developer</string>
-    <string name="creator_description">PDF Reader Pro was created to provide a free, open-source, and privacy-focused PDF reading experience. With features like bookmarks, favorites, reading themes, and customizable settings, it aims to be a complete PDF solution for Android users.</string>
+    <string name="about_creator">About This Fork</string>
+    <string name="creator_name">cnnetworkoff</string>
+    <string name="creator_title">Maintainer</string>
+    <string name="creator_description">This GPL-3.0 fork of PDF Reader Pro is maintained by cnnetworkoff. The project remains open source and preserves upstream license notices and third-party attributions.</string>
     <string name="gnu_license">GNU General Public License v3.0</string>
 
     <!-- Update Sheet -->
@@ -932,7 +932,7 @@
     <string name="license_gpl">GPL 3.0</string>
     <string name="latest_badge">LATEST</string>
     <string name="privacy_protected">Your Privacy is Protected</string>
-    <string name="about_app_description">PDF Reader Pro was created to provide a free, open-source, and privacy-focused PDF reading experience. With features like bookmarks, favorites, reading themes, and customizable settings, it aims to be a complete PDF solution for Android users.</string>
+    <string name="about_app_description">This GPL-3.0 fork of PDF Reader Pro is maintained by cnnetworkoff. It keeps the original open-source license terms while continuing to provide a privacy-focused PDF reading experience for Android users.</string>
     <string name="gpl_full_name">GNU General Public License v3.0</string>
     <string name="key_terms">Key Terms</string>
     <string name="view_gpl_license">View Full GPL v3.0 License</string>
@@ -1029,7 +1029,7 @@
     <string name="gpl_freedom_distribute">Freedom to distribute copies</string>
     <string name="gpl_freedom_modify">Freedom to distribute modified versions</string>
     <string name="gpl_derivative">Derivative works must be open source under GPL v3.0</string>
-    <string name="gpl_notice">PDF Reader Pro - Open Source PDF Viewer\nCopyright (C) %d K M Rejowan Ahmmed\n\nThis program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</string>
+    <string name="gpl_notice">PDF Reader Pro - Open Source PDF Viewer\nCopyright (C) %d K M Rejowan Ahmmed\nModified fork maintained by cnnetworkoff.\n\nThis program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</string>
 
     <!-- Onboarding -->
     <string name="onboarding_welcome">Welcome to\nPDF Reader Pro</string>

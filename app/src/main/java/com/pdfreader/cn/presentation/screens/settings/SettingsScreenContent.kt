@@ -2299,11 +2299,11 @@ private fun CreatorContent() {
             Column(modifier = Modifier.padding(16.dp)) {
                 CreatorLinkItem(
                     icon = Icons.Rounded.Language,
-                    label = "Website",
-                    value = "rejowan.com",
+                    label = "Project",
+                    value = "github.com/cnnetworkoff/PdfReaderPro",
                     accentColor = AccentBlue,
                     onClick = {
-                        val intent = Intent(Intent.ACTION_VIEW, "https://rejowan.com".toUri())
+                        val intent = Intent(Intent.ACTION_VIEW, "https://github.com/cnnetworkoff/PdfReaderPro".toUri())
                         context.startActivity(intent)
                     }
                 )
@@ -2340,11 +2340,11 @@ private fun CreatorContent() {
 
                 CreatorLinkItem(
                     icon = Icons.Rounded.Work,
-                    label = "LinkedIn",
-                    value = "linkedin.com/in/ahmmedrejowan",
+                    label = "Profile",
+                    value = "github.com/cnnetworkoff",
                     accentColor = AccentTeal,
                     onClick = {
-                        val intent = Intent(Intent.ACTION_VIEW, "https://linkedin.com/in/ahmmedrejowan".toUri())
+                        val intent = Intent(Intent.ACTION_VIEW, "https://github.com/cnnetworkoff".toUri())
                         context.startActivity(intent)
                     }
                 )

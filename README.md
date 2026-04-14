@@ -6,6 +6,9 @@
   <p>
     A feature-rich, privacy-focused PDF app built with Jetpack Compose and Material 3. View, edit, and manage PDFs with 12 powerful tools.
   </p>
+  <p>
+    This repository is a modified GPL-3.0 fork maintained by cnnetworkoff.
+  </p>
 
 [![Android](https://img.shields.io/badge/Platform-Android-green.svg?style=flat)](https://www.android.com/)
 [![API](https://img.shields.io/badge/API-24%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=24)
@@ -184,6 +187,8 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 ```
 
+This fork is maintained by `cnnetworkoff`. Original copyright and license notices are preserved under GPL-3.0.
+
 > **Warning**
 > This is a copyleft license. Any derivative work must also be open source under the same license.
 
@@ -197,9 +202,15 @@ GNU General Public License for more details.
 
 ---
 
-## Author
+## Original Author
 
 **K M Rejowan Ahmmed**
+
+- GitHub: [@ahmmedrejowan](https://github.com/ahmmedrejowan)
+
+## Maintainer
+
+**cnnetworkoff**
 
 - GitHub: [@cnnetworkoff](https://github.com/cnnetworkoff)
 - Email: [cnnetwork332@gmail.com](mailto:cnnetwork332@gmail.com)
