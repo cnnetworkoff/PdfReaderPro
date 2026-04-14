@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PDF Reader Pro</title>
+  <meta name="description" content="PDF Reader Pro for Android by cnnetworkoff. Open source PDF reader and tools.">
+  <style>
+    :root {
+      --bg: #f3efe4;
+      --panel: rgba(255, 255, 255, 0.82);
+      --ink: #1d2a26;
+      --muted: #53645c;
+      --accent: #146356;
+      --accent-2: #f2b544;
+      --line: rgba(20, 99, 86, 0.14);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(242, 181, 68, 0.35), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(20, 99, 86, 0.22), transparent 28%),
+        linear-gradient(135deg, #f6f3ea, var(--bg));
+    }
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+    .hero, .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 18px 50px rgba(29, 42, 38, 0.08);
+    }
+    .hero { padding: 32px; }
+    h1, h2 { margin: 0 0 12px; }
+    h1 { font-size: clamp(2.3rem, 5vw, 4rem); line-height: 0.95; }
+    p { line-height: 1.65; color: var(--muted); }
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(20, 99, 86, 0.09);
+      color: var(--accent);
+      font-size: 0.86rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .actions, .grid {
+      display: grid;
+      gap: 14px;
+    }
+    .actions {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      margin-top: 24px;
+    }
+    .btn, .card {
+      text-decoration: none;
+      color: inherit;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+    }
+    .btn {
+      padding: 14px 18px;
+      background: #fff;
+      font-weight: 700;
+    }
+    .btn.primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-top: 22px;
+    }
+    .card {
+      padding: 18px;
+      background: rgba(255,255,255,0.8);
+    }
+    .card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+    .stack { margin-top: 22px; }
+    .panel { padding: 28px; margin-top: 22px; }
+    ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); }
+    a { color: var(--accent); }
+    footer {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">GPL-3.0 Fork</div>
+      <h1>PDF Reader Pro</h1>
+      <p>
+        PDF Reader Pro is an Android PDF reader and PDF tools app maintained by
+        <strong>cnnetworkoff</strong>. This repository is a modified GPL-3.0 fork
+        of the original open-source project and keeps original license notices in place.
+      </p>
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/cnnetworkoff/PdfReaderPro">View Source Code</a>
+        <a class="btn" href="privacy.html">Privacy Policy</a>
+        <a class="btn" href="mailto:cnnetwork332@gmail.com">Contact Maintainer</a>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <strong>Package</strong>
+          <span>`com.pdfreader.cn`</span>
+        </div>
+        <div class="card">
+          <strong>Version</strong>
+          <span>1.0.0</span>
+        </div>
+        <div class="card">
+          <strong>Updates</strong>
+          <span>Play Store builds receive updates through Google Play.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Project Notes</h2>
+      <p>
+        This site exists to provide a public project homepage and a stable privacy-policy URL
+        for app-store listings. The app remains open source under GPL-3.0.
+      </p>
+      <ul>
+        <li>Source code: <a href="https://github.com/cnnetworkoff/PdfReaderPro">github.com/cnnetworkoff/PdfReaderPro</a></li>
+        <li>Privacy policy: <a href="privacy.html">Hosted on this site</a></li>
+        <li>Maintainer contact: <a href="mailto:cnnetwork332@gmail.com">cnnetwork332@gmail.com</a></li>
+      </ul>
+    </section>
+
+    <footer>
+      Original copyright notices remain with the upstream project.
+      This modified fork is maintained by cnnetworkoff.
+    </footer>
+  </div>
+</body>
+</html>

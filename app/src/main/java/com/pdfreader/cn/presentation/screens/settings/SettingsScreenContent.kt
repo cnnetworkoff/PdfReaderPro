@@ -130,6 +130,7 @@ import com.pdfreader.cn.domain.model.UpdateState
 import com.pdfreader.cn.presentation.components.DownloadProgressSheet
 import com.pdfreader.cn.presentation.components.UpdateAvailableSheet
 import com.pdfreader.cn.util.ApkDownloadManager
+import com.pdfreader.cn.util.Constants
 import com.pdfreader.licensy.LicenseContent
 import com.pdfreader.licensy.Licenses
 import com.pdfreader.licensy.compose.LicensyList
@@ -1913,6 +1914,8 @@ private fun ChangelogVersionItem(
 
 @Composable
 private fun PrivacyPolicyContent() {
+    val context = LocalContext.current
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -1975,8 +1978,29 @@ private fun PrivacyPolicyContent() {
             content = stringResource(R.string.privacy_update_content)
         )
 
+        Surface(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 12.dp),
+            shape = RoundedCornerShape(12.dp),
+            color = MaterialTheme.colorScheme.surfaceContainerLow
+        ) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                CreatorLinkItem(
+                    icon = Icons.Rounded.Link,
+                    label = "Hosted policy",
+                    value = "cnnetworkoff.github.io/PdfReaderPro/privacy.html",
+                    accentColor = AccentBlue,
+                    onClick = {
+                        val intent = Intent(Intent.ACTION_VIEW, Constants.PRIVACY_POLICY_URL.toUri())
+                        context.startActivity(intent)
+                    }
+                )
+            }
+        }
+
         Text(
-            text = stringResource(R.string.last_updated),
+            text = stringResource(R.string.last_updated, "2026-04-14"),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(top = 16.dp)
@@ -2212,11 +2236,11 @@ private fun CreatorContent() {
             Column(modifier = Modifier.padding(16.dp)) {
                 CreatorLinkItem(
                     icon = Icons.Rounded.Language,
-                    label = "Project",
-                    value = "github.com/cnnetworkoff/PdfReaderPro",
+                    label = "Website",
+                    value = "cnnetworkoff.github.io/PdfReaderPro",
                     accentColor = AccentBlue,
                     onClick = {
-                        val intent = Intent(Intent.ACTION_VIEW, "https://github.com/cnnetworkoff/PdfReaderPro".toUri())
+                        val intent = Intent(Intent.ACTION_VIEW, Constants.WEBSITE_URL.toUri())
                         context.startActivity(intent)
                     }
                 )

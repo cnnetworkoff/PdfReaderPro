@@ -1012,7 +1012,7 @@
     <!-- Privacy Policy -->
     <string name="no_data_collection">No data collection or sharing</string>
     <string name="no_analytics">No analytics or tracking</string>
-    <string name="optional_updates">Optional update checks only</string>
+    <string name="optional_updates">Updates are delivered through Google Play</string>
     <string name="local_storage">All data stored locally</string>
     <string name="privacy_no_collection_title">No Data Collection</string>
     <string name="privacy_no_collection_content">PDF Reader Pro does not collect, store, transmit, or share any personal data. The app operates completely offline and does not require an internet connection. There are no analytics, tracking, or telemetry of any kind.</string>
@@ -1023,7 +1023,7 @@
     <string name="privacy_password_title">Password Storage</string>
     <string name="privacy_password_content">If you choose to save passwords for protected PDFs, they are stored locally using encrypted storage. Passwords never leave your device.</string>
     <string name="privacy_update_title">Update Checking</string>
-    <string name="privacy_update_content">The app can optionally check for updates via GitHub\'s public API. This feature only retrieves release information and does not send any personal data, device identifiers, or usage statistics. You can disable automatic update checks in Settings or check manually whenever you prefer.</string>
+    <string name="privacy_update_content">This Play Store build receives updates through Google Play. The app does not download or install APK updates directly inside the app.</string>
 
     <!-- GPL License Terms -->
     <string name="gpl_freedom_use">Freedom to use the software for any purpose</string>

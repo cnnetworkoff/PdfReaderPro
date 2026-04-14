@@ -17,6 +17,8 @@
 [![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-Latest-blue.svg)](https://developer.android.com/jetpack/compose)
 </div>
 
+Project site: <https://cnnetworkoff.github.io/PdfReaderPro/>
+
 ---
 
 ## Features
@@ -124,7 +126,7 @@ app/
 
 - `READ_EXTERNAL_STORAGE` / `READ_MEDIA_DOCUMENTS` - Access PDF files
 - `WRITE_EXTERNAL_STORAGE` - Save processed PDFs (Android 9 and below)
-- `INTERNET` - Optional, only for in-app update checks
+- `INTERNET` - Used for web links and optional online/network PDF access paths
 
 **Note:** This app does not collect or transmit any user data.
 

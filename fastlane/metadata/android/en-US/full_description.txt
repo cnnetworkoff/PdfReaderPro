@@ -15,8 +15,12 @@ PDF Reader Pro is a feature-rich, privacy-focused PDF app built with Jetpack Com
 
 <b>Privacy:</b>
 
-This app does not collect or transmit any user data. Network access is only used for optional in-app update checks from GitHub.
+This app does not collect or transmit any user data. This Play Store build receives updates through Google Play and does not download APK updates directly inside the app.
 
 <b>Open Source:</b>
 
 PDF Reader Pro is free and open source software licensed under GPL-3.0.
+
+<b>Website:</b>
+
+https://cnnetworkoff.github.io/PdfReaderPro/

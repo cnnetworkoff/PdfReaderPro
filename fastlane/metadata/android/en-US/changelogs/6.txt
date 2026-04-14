@@ -1,1 +1,4 @@
-• F-Droid build compatibility (removed JVM toolchain requirement)
+• Rebranded package to com.pdfreader.cn
+• Updated app and repository links for cnnetworkoff
+• Added hosted project website and privacy policy
+• Play Store build now receives updates through Google Play
