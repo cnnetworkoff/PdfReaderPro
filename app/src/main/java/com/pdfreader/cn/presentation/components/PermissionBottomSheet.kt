@@ -1,9 +1,5 @@
 package com.pdfreader.cn.presentation.components
 
-import android.content.Intent
-import android.net.Uri
-import android.os.Build
-import android.provider.Settings
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,7 +24,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -43,7 +38,6 @@ fun PermissionBottomSheet(
     onDismiss: () -> Unit,
     onGrantClick: () -> Unit
 ) {
-    val context = LocalContext.current
     val softPurple = Color(0xFF9575CD)
 
     ModalBottomSheet(
@@ -102,12 +96,6 @@ fun PermissionBottomSheet(
 
             Button(
                 onClick = {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                        val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION).apply {
-                            data = Uri.parse("package:${context.packageName}")
-                        }
-                        context.startActivity(intent)
-                    }
                     onGrantClick()
                 },
                 modifier = Modifier

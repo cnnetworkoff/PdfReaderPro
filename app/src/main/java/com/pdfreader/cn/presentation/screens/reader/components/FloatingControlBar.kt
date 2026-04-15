@@ -14,6 +14,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.MenuBook
 import androidx.compose.material.icons.rounded.Bookmark
 import androidx.compose.material.icons.rounded.BookmarkBorder
+import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material.icons.rounded.MoreHoriz
 import androidx.compose.material.icons.rounded.Palette
 import androidx.compose.material.icons.rounded.ViewDay
@@ -47,6 +48,7 @@ fun FloatingControlBar(
     onViewClick: () -> Unit,
     onZoomClick: () -> Unit,
     onDisplayClick: () -> Unit,
+    onEditClick: () -> Unit,
     onBookmarkClick: () -> Unit,
     onMoreClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -105,6 +107,14 @@ fun FloatingControlBar(
                 contentDescription = "Display Settings",
                 onClick = onDisplayClick,
                 tint = AccentAmber,
+                isDarkMode = isDarkMode
+            )
+
+            ControlBarButton(
+                icon = Icons.Rounded.Edit,
+                contentDescription = "Edit PDF",
+                onClick = onEditClick,
+                tint = AccentPurple,
                 isDarkMode = isDarkMode
             )
 

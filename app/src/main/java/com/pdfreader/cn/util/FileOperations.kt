@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.OpenableColumns
+import android.webkit.MimeTypeMap
 import androidx.core.content.FileProvider
 import timber.log.Timber
 import java.io.File
@@ -150,7 +151,7 @@ object FileOperations {
             )
 
             val shareIntent = Intent(Intent.ACTION_SEND).apply {
-                type = "application/pdf"
+                type = resolveMimeType(file.name)
                 putExtra(Intent.EXTRA_STREAM, uri)
                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             }
@@ -184,7 +185,7 @@ object FileOperations {
             }
 
             val shareIntent = Intent(Intent.ACTION_SEND_MULTIPLE).apply {
-                type = "application/pdf"
+                type = "*/*"
                 putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris)
                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             }
@@ -260,5 +261,10 @@ object FileOperations {
         } catch (e: Exception) {
             false
         }
+    }
+
+    private fun resolveMimeType(fileName: String): String {
+        val extension = fileName.substringAfterLast('.', "").lowercase()
+        return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension) ?: "*/*"
     }
 }

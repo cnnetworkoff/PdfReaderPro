@@ -69,6 +69,7 @@ data class ReaderState(
     val isDisplaySheetVisible: Boolean = false,
     val isBookmarksSheetVisible: Boolean = false,
     val isMoreOptionsSheetVisible: Boolean = false,
+    val isEditOptionsSheetVisible: Boolean = false,
 
     // Screen orientation
     val screenOrientation: ScreenOrientation = ScreenOrientation.AUTO,
@@ -110,7 +111,12 @@ data class ReaderState(
     val isTopBarMenuVisible: Boolean = false,
 
     // Remove favourite confirmation
-    val isRemoveFavoriteDialogVisible: Boolean = false
+    val isRemoveFavoriteDialogVisible: Boolean = false,
+    val isHighlightModeActive: Boolean = false,
+    val isTextInsertModeActive: Boolean = false,
+    val isDrawModeActive: Boolean = false,
+    val isStampModeActive: Boolean = false,
+    val hasUnsavedEdits: Boolean = false
 ) {
     val pageLabel: String
         get() = "${currentPage + 1} / $totalPages"
@@ -200,6 +206,8 @@ sealed class ReaderAction {
     data object HideBookmarksSheet : ReaderAction()
     data object ShowMoreOptionsSheet : ReaderAction()
     data object HideMoreOptionsSheet : ReaderAction()
+    data object ShowEditOptionsSheet : ReaderAction()
+    data object HideEditOptionsSheet : ReaderAction()
 
     // Reading settings
     data class SetBrightness(val brightness: Float) : ReaderAction()
@@ -274,4 +282,11 @@ sealed class ReaderAction {
 
     // Save with picker
     data object SaveDocumentWithPicker : ReaderAction()
+    data object EnableHighlightMode : ReaderAction()
+    data object EnableTextInsertMode : ReaderAction()
+    data object EnableDrawMode : ReaderAction()
+    data object EnableStampMode : ReaderAction()
+    data object DisableEditModes : ReaderAction()
+    data object UndoEditAction : ReaderAction()
+    data object RedoEditAction : ReaderAction()
 }

@@ -17,6 +17,7 @@ import com.pdfreader.cn.domain.repository.PreferencesRepository
 import com.pdfreader.cn.domain.repository.RecentRepository
 import kotlinx.coroutines.flow.first
 import com.pdfreader.cn.presentation.components.pdf.PdfViewer
+import com.pdfreader.cn.presentation.components.pdf.PdfEditor
 import com.pdfreader.cn.presentation.components.pdf.addListener
 import com.pdfreader.cn.presentation.screens.reader.components.AttachmentItem
 import com.pdfreader.cn.presentation.screens.reader.components.OutlineItem
@@ -324,6 +325,24 @@ class ReaderViewModel(
             },
             onLinkClick = { link ->
                 onAction(ReaderAction.OpenLink(link))
+            },
+            onShowEditorMessage = { message ->
+                viewModelScope.launch {
+                    _events.send(ReaderEvent.ShowMessage(message))
+                }
+            },
+            onAnnotationEditor = { type ->
+                _state.update { it.copy(hasUnsavedEdits = type is PdfEditor.AnnotationEventType.Unsaved) }
+            },
+            onEditorModeStateChange = { editorState ->
+                _state.update {
+                    it.copy(
+                        isHighlightModeActive = editorState.isTextHighlighterOn,
+                        isTextInsertModeActive = editorState.isEditorFreeTextOn,
+                        isDrawModeActive = editorState.isEditorInkOn,
+                        isStampModeActive = editorState.isEditorStampOn
+                    )
+                }
             }
         )
     }
@@ -453,6 +472,8 @@ class ReaderViewModel(
             is ReaderAction.HideBookmarksSheet -> _state.update { it.copy(isBookmarksSheetVisible = false) }
             is ReaderAction.ShowMoreOptionsSheet -> _state.update { it.copy(isMoreOptionsSheetVisible = true) }
             is ReaderAction.HideMoreOptionsSheet -> _state.update { it.copy(isMoreOptionsSheetVisible = false) }
+            is ReaderAction.ShowEditOptionsSheet -> _state.update { it.copy(isEditOptionsSheetVisible = true) }
+            is ReaderAction.HideEditOptionsSheet -> _state.update { it.copy(isEditOptionsSheetVisible = false) }
 
             is ReaderAction.SetBrightness -> {
                 _state.update { it.copy(brightness = action.brightness) }
@@ -565,6 +586,13 @@ class ReaderViewModel(
             is ReaderAction.SaveDocumentWithPicker -> viewModelScope.launch { _events.send(ReaderEvent.SaveDocumentPicker) }
             is ReaderAction.CloseDocument -> viewModelScope.launch { _events.send(ReaderEvent.DocumentClosed) }
             is ReaderAction.OpenLink -> openLink(action.url)
+            is ReaderAction.EnableHighlightMode -> enableHighlightMode()
+            is ReaderAction.EnableTextInsertMode -> enableTextInsertMode()
+            is ReaderAction.EnableDrawMode -> enableDrawMode()
+            is ReaderAction.EnableStampMode -> enableStampMode()
+            is ReaderAction.DisableEditModes -> disableEditModes()
+            is ReaderAction.UndoEditAction -> undoEditAction()
+            is ReaderAction.RedoEditAction -> redoEditAction()
 
             // Top bar menu
             is ReaderAction.ShowTopBarMenu -> _state.update { it.copy(isTopBarMenuVisible = true) }
@@ -943,5 +971,105 @@ class ReaderViewModel(
 
     fun getDocumentFileName(): String {
         return File(pdfPath).name
+    }
+
+    private fun enableHighlightMode() {
+        pdfViewer?.editor?.apply {
+            textHighlighterOn = true
+            freeTextOn = false
+            inkOn = false
+            stampOn = false
+            applyHighlightColorOnTextSelection = true
+        }
+        _state.update {
+            it.copy(
+                isEditOptionsSheetVisible = false,
+                isHighlightModeActive = true,
+                isTextInsertModeActive = false,
+                isDrawModeActive = false,
+                isStampModeActive = false
+            )
+        }
+    }
+
+    private fun enableTextInsertMode() {
+        pdfViewer?.editor?.apply {
+            textHighlighterOn = false
+            freeTextOn = true
+            inkOn = false
+            stampOn = false
+        }
+        _state.update {
+            it.copy(
+                isEditOptionsSheetVisible = false,
+                isHighlightModeActive = false,
+                isTextInsertModeActive = true,
+                isDrawModeActive = false,
+                isStampModeActive = false
+            )
+        }
+    }
+
+    private fun enableDrawMode() {
+        pdfViewer?.editor?.apply {
+            textHighlighterOn = false
+            freeTextOn = false
+            inkOn = true
+            stampOn = false
+        }
+        _state.update {
+            it.copy(
+                isEditOptionsSheetVisible = false,
+                isHighlightModeActive = false,
+                isTextInsertModeActive = false,
+                isDrawModeActive = true,
+                isStampModeActive = false
+            )
+        }
+    }
+
+    private fun enableStampMode() {
+        pdfViewer?.editor?.apply {
+            textHighlighterOn = false
+            freeTextOn = false
+            inkOn = false
+            stampOn = true
+            clickAddStamp()
+        }
+        _state.update {
+            it.copy(
+                isEditOptionsSheetVisible = false,
+                isHighlightModeActive = false,
+                isTextInsertModeActive = false,
+                isDrawModeActive = false,
+                isStampModeActive = true
+            )
+        }
+    }
+
+    private fun disableEditModes() {
+        pdfViewer?.editor?.apply {
+            textHighlighterOn = false
+            freeTextOn = false
+            inkOn = false
+            stampOn = false
+        }
+        _state.update {
+            it.copy(
+                isEditOptionsSheetVisible = false,
+                isHighlightModeActive = false,
+                isTextInsertModeActive = false,
+                isDrawModeActive = false,
+                isStampModeActive = false
+            )
+        }
+    }
+
+    private fun undoEditAction() {
+        pdfViewer?.editor?.undo()
+    }
+
+    private fun redoEditAction() {
+        pdfViewer?.editor?.redo()
     }
 }

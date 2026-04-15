@@ -98,6 +98,7 @@ import com.pdfreader.cn.presentation.components.dialogs.DeleteConfirmSheet
 import com.pdfreader.cn.presentation.components.dialogs.FileInfoDialog
 import com.pdfreader.cn.presentation.components.dialogs.RenameSheet
 import com.pdfreader.cn.presentation.navigation.navigateToReader
+import com.pdfreader.cn.util.DocumentIntents
 import com.pdfreader.cn.util.FileOperations
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
@@ -217,7 +218,11 @@ fun SearchScreen(
                     query = searchQuery,
                     results = searchResults,
                     onFileClick = { file ->
-                        navController.navigateToReader(file.path)
+                        if (file.isPdf) {
+                            navController.navigateToReader(file.path)
+                        } else {
+                            DocumentIntents.openDocument(context, file)
+                        }
                     },
                     onFileOptionsClick = { file ->
                         selectedFile = file

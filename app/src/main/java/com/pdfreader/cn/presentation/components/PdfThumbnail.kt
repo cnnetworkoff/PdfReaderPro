@@ -42,16 +42,21 @@ fun PdfThumbnail(
     modifier: Modifier = Modifier,
     size: Dp = 56.dp,
     pdfPath: String? = null,
-    pageCount: Int? = null
+    pageCount: Int? = null,
+    isPdf: Boolean = true,
+    fileTypeLabel: String = "PDF"
 ) {
     val context = LocalContext.current
     var thumbnail by remember(pdfPath) { mutableStateOf<Bitmap?>(null) }
-    var isLoading by remember(pdfPath) { mutableStateOf(pdfPath != null) }
+    var isLoading by remember(pdfPath, isPdf) { mutableStateOf(pdfPath != null && isPdf) }
 
-    LaunchedEffect(pdfPath) {
-        if (pdfPath != null) {
+    LaunchedEffect(pdfPath, isPdf) {
+        if (pdfPath != null && isPdf) {
             isLoading = true
             thumbnail = PdfThumbnailManager.getThumbnail(context, pdfPath)
+            isLoading = false
+        } else {
+            thumbnail = null
             isLoading = false
         }
     }
@@ -102,7 +107,7 @@ fun PdfThumbnail(
                         verticalArrangement = Arrangement.Center
                     ) {
                         Text(
-                            text = "PDF",
+                            text = fileTypeLabel,
                             style = MaterialTheme.typography.labelMedium.copy(
                                 fontWeight = FontWeight.Bold,
                                 fontSize = (size.value * 0.22f).sp,
@@ -130,16 +135,21 @@ fun PdfThumbnail(
 fun PdfThumbnailGrid(
     modifier: Modifier = Modifier,
     pdfPath: String? = null,
-    pageCount: Int? = null
+    pageCount: Int? = null,
+    isPdf: Boolean = true,
+    fileTypeLabel: String = "PDF"
 ) {
     val context = LocalContext.current
     var thumbnail by remember(pdfPath) { mutableStateOf<Bitmap?>(null) }
-    var isLoading by remember(pdfPath) { mutableStateOf(pdfPath != null) }
+    var isLoading by remember(pdfPath, isPdf) { mutableStateOf(pdfPath != null && isPdf) }
 
-    LaunchedEffect(pdfPath) {
-        if (pdfPath != null) {
+    LaunchedEffect(pdfPath, isPdf) {
+        if (pdfPath != null && isPdf) {
             isLoading = true
             thumbnail = PdfThumbnailManager.getThumbnail(context, pdfPath)
+            isLoading = false
+        } else {
+            thumbnail = null
             isLoading = false
         }
     }
@@ -190,7 +200,7 @@ fun PdfThumbnailGrid(
                         verticalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
                         Text(
-                            text = "PDF",
+                            text = fileTypeLabel,
                             style = MaterialTheme.typography.headlineSmall.copy(
                                 fontWeight = FontWeight.Bold,
                                 letterSpacing = 2.sp

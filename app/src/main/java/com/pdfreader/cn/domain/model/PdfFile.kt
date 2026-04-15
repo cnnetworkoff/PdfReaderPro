@@ -7,6 +7,7 @@ data class PdfFile(
     val name: String,
     val path: String,
     val uri: Uri,
+    val mimeType: String = "application/pdf",
     val size: Long,
     val dateModified: Long,
     val dateAdded: Long,
@@ -15,8 +16,16 @@ data class PdfFile(
     val isFavorite: Boolean = false
 ) {
     val displayName: String
-        get() = name.removeSuffix(".pdf").removeSuffix(".PDF")
+        get() = name.substringBeforeLast(".", name)
 
     val folderName: String
         get() = parentFolder.substringAfterLast("/").ifEmpty { "Storage" }
+
+    val isPdf: Boolean
+        get() = mimeType == "application/pdf" || name.endsWith(".pdf", ignoreCase = true)
+
+    val extensionLabel: String
+        get() = name.substringAfterLast('.', "").ifBlank {
+            mimeType.substringAfterLast('/').ifBlank { "FILE" }
+        }.uppercase()
 }

@@ -14,6 +14,7 @@ import com.pdfreader.cn.presentation.screens.onboarding.OnboardingViewModel
 import com.pdfreader.cn.presentation.screens.reader.ReaderScreen
 import com.pdfreader.cn.presentation.screens.search.SearchScreen
 import com.pdfreader.cn.presentation.screens.settings.SettingsScreen
+import com.pdfreader.cn.presentation.screens.tools.ToolsScreen
 import com.pdfreader.cn.presentation.screens.tools.compress.CompressScreen
 import com.pdfreader.cn.presentation.screens.tools.merge.MergeScreen
 import com.pdfreader.cn.presentation.screens.tools.lock.LockScreen
@@ -102,7 +103,7 @@ fun PdfReaderNavHost(
 
         // Tools Screen
         composable<Tools> {
-            // TODO: ToolsScreen(navController)
+            ToolsScreen(navController = navController)
         }
 
         // Tool: Merge PDFs
@@ -233,6 +234,10 @@ fun NavController.navigateToReader(path: String, page: Int = 0, fromIntent: Bool
  */
 fun NavController.navigateToSearch(query: String = "") {
     navigate(Search(query = query))
+}
+
+fun NavController.navigateToTools() {
+    navigate(Tools)
 }
 
 /**

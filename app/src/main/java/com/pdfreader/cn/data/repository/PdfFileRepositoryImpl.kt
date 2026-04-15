@@ -22,6 +22,17 @@ class PdfFileRepositoryImpl(
     private val context: Context
 ) : PdfFileRepository {
 
+    private val supportedMimeTypes = listOf(
+        "application/pdf",
+        "text/plain",
+        "application/msword",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.ms-excel",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    )
+
     private val _pdfFiles = MutableStateFlow<List<PdfFile>>(emptyList())
 
     override fun getAllPdfFiles(): Flow<List<PdfFile>> = _pdfFiles
@@ -129,14 +140,16 @@ class PdfFileRepositoryImpl(
         val projection = arrayOf(
             MediaStore.Files.FileColumns._ID,
             MediaStore.Files.FileColumns.DISPLAY_NAME,
+            MediaStore.Files.FileColumns.MIME_TYPE,
             MediaStore.Files.FileColumns.DATA,
             MediaStore.Files.FileColumns.SIZE,
             MediaStore.Files.FileColumns.DATE_MODIFIED,
             MediaStore.Files.FileColumns.DATE_ADDED
         )
 
-        val selection = "${MediaStore.Files.FileColumns.MIME_TYPE} = ?"
-        val selectionArgs = arrayOf("application/pdf")
+        val placeholders = supportedMimeTypes.joinToString(",") { "?" }
+        val selection = "${MediaStore.Files.FileColumns.MIME_TYPE} IN ($placeholders)"
+        val selectionArgs = supportedMimeTypes.toTypedArray()
         val sortOrder = "${MediaStore.Files.FileColumns.DATE_MODIFIED} DESC"
 
         try {
@@ -149,6 +162,7 @@ class PdfFileRepositoryImpl(
             )?.use { cursor ->
                 val idColumn = cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID)
                 val nameColumn = cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DISPLAY_NAME)
+                val mimeTypeColumn = cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns.MIME_TYPE)
                 val pathColumn = cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DATA)
                 val sizeColumn = cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns.SIZE)
                 val dateModifiedColumn = cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DATE_MODIFIED)
@@ -157,6 +171,7 @@ class PdfFileRepositoryImpl(
                 while (cursor.moveToNext()) {
                     val id = cursor.getLong(idColumn)
                     val name = cursor.getString(nameColumn) ?: "Unknown.pdf"
+                    val mimeType = cursor.getString(mimeTypeColumn) ?: "application/octet-stream"
                     val path = cursor.getString(pathColumn) ?: continue
                     val size = cursor.getLong(sizeColumn)
                     val dateModified = cursor.getLong(dateModifiedColumn) * 1000
@@ -167,7 +182,11 @@ class PdfFileRepositoryImpl(
 
                     val uri = ContentUris.withAppendedId(collection, id)
                     val parentFolder = File(path).parent ?: ""
-                    val pageCount = PdfThumbnailManager.getPageCount(path)
+                    val pageCount = if (mimeType == "application/pdf" || name.endsWith(".pdf", ignoreCase = true)) {
+                        PdfThumbnailManager.getPageCount(path)
+                    } else {
+                        0
+                    }
 
                     pdfList.add(
                         PdfFile(
@@ -175,6 +194,7 @@ class PdfFileRepositoryImpl(
                             name = name,
                             path = path,
                             uri = uri,
+                            mimeType = mimeType,
                             size = size,
                             dateModified = dateModified,
                             dateAdded = dateAdded,

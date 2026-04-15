@@ -33,6 +33,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
 import androidx.compose.material.icons.rounded.Bookmark
+import androidx.compose.material.icons.rounded.Build
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.icons.rounded.MoreHoriz
 import androidx.compose.material.icons.rounded.Numbers
@@ -68,7 +69,6 @@ import androidx.compose.ui.unit.dp
 import com.pdfreader.cn.R
 import kotlinx.coroutines.delay
 
-// Design colors
 private val AccentPurple = Color(0xFF9575CD)
 private val AccentBlue = Color(0xFF64B5F6)
 private val AccentTeal = Color(0xFF4DB6AC)
@@ -81,6 +81,7 @@ fun MoreOptionsSheet(
     onBookmarksClick: () -> Unit,
     onAutoScrollClick: () -> Unit,
     onGoToPageClick: () -> Unit,
+    onToolsClick: () -> Unit,
     onPrintClick: () -> Unit,
     onShareClick: () -> Unit,
     onDocumentInfoClick: () -> Unit,
@@ -94,6 +95,7 @@ fun MoreOptionsSheet(
             onBookmarksClick = onBookmarksClick,
             onAutoScrollClick = onAutoScrollClick,
             onGoToPageClick = onGoToPageClick,
+            onToolsClick = onToolsClick,
             onPrintClick = onPrintClick,
             onShareClick = onShareClick,
             onDocumentInfoClick = onDocumentInfoClick,
@@ -104,6 +106,7 @@ fun MoreOptionsSheet(
             onBookmarksClick = onBookmarksClick,
             onAutoScrollClick = onAutoScrollClick,
             onGoToPageClick = onGoToPageClick,
+            onToolsClick = onToolsClick,
             onPrintClick = onPrintClick,
             onShareClick = onShareClick,
             onDocumentInfoClick = onDocumentInfoClick,
@@ -118,16 +121,15 @@ private fun MoreOptionsBottomSheet(
     onBookmarksClick: () -> Unit,
     onAutoScrollClick: () -> Unit,
     onGoToPageClick: () -> Unit,
+    onToolsClick: () -> Unit,
     onPrintClick: () -> Unit,
     onShareClick: () -> Unit,
     onDocumentInfoClick: () -> Unit,
     onDismiss: () -> Unit
 ) {
-    val sheetState = rememberModalBottomSheetState()
-
     ModalBottomSheet(
         onDismissRequest = onDismiss,
-        sheetState = sheetState,
+        sheetState = rememberModalBottomSheetState(),
         shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp),
         containerColor = MaterialTheme.colorScheme.surface,
         tonalElevation = 2.dp
@@ -136,6 +138,7 @@ private fun MoreOptionsBottomSheet(
             onBookmarksClick = onBookmarksClick,
             onAutoScrollClick = onAutoScrollClick,
             onGoToPageClick = onGoToPageClick,
+            onToolsClick = onToolsClick,
             onPrintClick = onPrintClick,
             onShareClick = onShareClick,
             onDocumentInfoClick = onDocumentInfoClick,
@@ -150,6 +153,7 @@ private fun MoreOptionsSideSheet(
     onBookmarksClick: () -> Unit,
     onAutoScrollClick: () -> Unit,
     onGoToPageClick: () -> Unit,
+    onToolsClick: () -> Unit,
     onPrintClick: () -> Unit,
     onShareClick: () -> Unit,
     onDocumentInfoClick: () -> Unit,
@@ -204,6 +208,7 @@ private fun MoreOptionsSideSheet(
                     onBookmarksClick = onBookmarksClick,
                     onAutoScrollClick = onAutoScrollClick,
                     onGoToPageClick = onGoToPageClick,
+                    onToolsClick = onToolsClick,
                     onPrintClick = onPrintClick,
                     onShareClick = onShareClick,
                     onDocumentInfoClick = onDocumentInfoClick,
@@ -226,6 +231,7 @@ private fun MoreOptionsSheetContent(
     onBookmarksClick: () -> Unit,
     onAutoScrollClick: () -> Unit,
     onGoToPageClick: () -> Unit,
+    onToolsClick: () -> Unit,
     onPrintClick: () -> Unit,
     onShareClick: () -> Unit,
     onDocumentInfoClick: () -> Unit,
@@ -237,14 +243,10 @@ private fun MoreOptionsSheetContent(
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp)
     ) {
-        // Header
         MoreOptionsHeader()
 
         Spacer(modifier = Modifier.height(12.dp))
-
-        // Reading Tools Section
         SectionLabel(text = stringResource(R.string.reading_tools))
-
         Spacer(modifier = Modifier.height(6.dp))
 
         OptionItem(
@@ -287,15 +289,25 @@ private fun MoreOptionsSheetContent(
             animationDelay = 100
         )
 
-        Spacer(modifier = Modifier.height(10.dp))
-        HorizontalDivider(
-            color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
+        Spacer(modifier = Modifier.height(4.dp))
+
+        OptionItem(
+            icon = Icons.Rounded.Build,
+            title = stringResource(R.string.tools),
+            subtitle = stringResource(R.string.open_pdf_tools_hub),
+            accentColor = AccentAmber,
+            onClick = {
+                onDismiss()
+                onToolsClick()
+            },
+            animationDelay = 150
         )
+
+        Spacer(modifier = Modifier.height(10.dp))
+        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
         Spacer(modifier = Modifier.height(10.dp))
 
-        // Document Actions Section
         SectionLabel(text = stringResource(R.string.document))
-
         Spacer(modifier = Modifier.height(6.dp))
 
         OptionItem(
@@ -307,7 +319,7 @@ private fun MoreOptionsSheetContent(
                 onDismiss()
                 onShareClick()
             },
-            animationDelay = 150
+            animationDelay = 200
         )
 
         Spacer(modifier = Modifier.height(4.dp))
@@ -321,7 +333,7 @@ private fun MoreOptionsSheetContent(
                 onDismiss()
                 onPrintClick()
             },
-            animationDelay = 200
+            animationDelay = 250
         )
 
         Spacer(modifier = Modifier.height(4.dp))
@@ -335,7 +347,7 @@ private fun MoreOptionsSheetContent(
                 onDismiss()
                 onDocumentInfoClick()
             },
-            animationDelay = 250
+            animationDelay = 300
         )
     }
 }
@@ -367,9 +379,7 @@ private fun MoreOptionsHeader(
         Column {
             Text(
                 text = stringResource(R.string.more_options),
-                style = MaterialTheme.typography.titleMedium.copy(
-                    fontWeight = FontWeight.SemiBold
-                ),
+                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
                 color = MaterialTheme.colorScheme.onSurface
             )
             Text(
@@ -388,9 +398,7 @@ private fun SectionLabel(
 ) {
     Text(
         text = text,
-        style = MaterialTheme.typography.labelSmall.copy(
-            fontWeight = FontWeight.Medium
-        ),
+        style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Medium),
         color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
         modifier = modifier.padding(start = 4.dp)
     )
@@ -423,61 +431,55 @@ private fun OptionItem(
         modifier = modifier
             .fillMaxWidth()
             .scale(scale)
-            .clip(RoundedCornerShape(8.dp))
+            .clip(RoundedCornerShape(16.dp))
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
-                indication = ripple(color = accentColor),
+                indication = ripple(color = accentColor, bounded = true),
                 onClick = onClick
             ),
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(16.dp),
         color = MaterialTheme.colorScheme.surfaceContainerLow
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(44.dp)
-                .padding(horizontal = 10.dp),
+                .padding(horizontal = 14.dp, vertical = 14.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Icon
             Surface(
-                shape = RoundedCornerShape(8.dp),
+                shape = RoundedCornerShape(12.dp),
                 color = accentColor.copy(alpha = 0.12f)
             ) {
                 Icon(
                     imageVector = icon,
-                    contentDescription = stringResource(R.string.cd_decorative),
+                    contentDescription = title,
+                    tint = accentColor,
                     modifier = Modifier
-                        .padding(6.dp)
-                        .size(16.dp),
-                    tint = accentColor
+                        .padding(10.dp)
+                        .size(20.dp)
                 )
             }
 
-            Spacer(modifier = Modifier.width(10.dp))
+            Spacer(modifier = Modifier.width(14.dp))
 
-            // Text
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = title,
-                    style = MaterialTheme.typography.bodySmall.copy(
-                        fontWeight = FontWeight.Medium
-                    ),
+                    style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium),
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 Text(
                     text = subtitle,
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.75f)
                 )
             }
 
-            // Arrow
             Icon(
                 imageVector = Icons.AutoMirrored.Rounded.KeyboardArrowRight,
-                contentDescription = stringResource(R.string.cd_decorative),
-                modifier = Modifier.size(16.dp),
-                tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f)
+                contentDescription = stringResource(R.string.cd_forward),
+                tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
+                modifier = Modifier.size(20.dp)
             )
         }
     }

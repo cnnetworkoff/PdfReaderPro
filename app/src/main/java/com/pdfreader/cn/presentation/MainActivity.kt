@@ -10,11 +10,17 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -27,11 +33,13 @@ import com.pdfreader.cn.presentation.navigation.Reader
 import com.pdfreader.cn.presentation.theme.PdfReaderProTheme
 import com.pdfreader.cn.presentation.theme.ThemeMode
 import com.pdfreader.cn.util.FileOperations
+import com.pdfreader.cn.util.UpdateService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
+import androidx.compose.ui.unit.dp
 
 class MainActivity : ComponentActivity() {
 
@@ -40,11 +48,13 @@ class MainActivity : ComponentActivity() {
     private var isReady by mutableStateOf(false)
     private var startDestination: Any by mutableStateOf(Home)
     private var hasCompletedOnboarding by mutableStateOf(false)
+    private lateinit var updateService: UpdateService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        updateService = UpdateService(this)
 
         // Keep splash visible while loading preferences
         splashScreen.setKeepOnScreenCondition { !isReady }
@@ -72,6 +82,23 @@ class MainActivity : ComponentActivity() {
         }
 
         setContent {
+            val updateState by updateService.state.collectAsState()
+            val snackbarHostState = remember { SnackbarHostState() }
+
+            LaunchedEffect(updateState.promptNonce) {
+                if (updateState.promptNonce > 0) {
+                    val result = snackbarHostState.showSnackbar(
+                        message = "Update ready",
+                        actionLabel = "Restart",
+                        duration = SnackbarDuration.Indefinite,
+                        withDismissAction = true
+                    )
+                    if (result == androidx.compose.material3.SnackbarResult.ActionPerformed) {
+                        updateService.completeUpdate()
+                    }
+                }
+            }
+
             // Observe theme preference
             val preferences by preferencesRepository.preferences.collectAsState(
                 initial = com.pdfreader.cn.domain.model.AppPreferences()
@@ -90,11 +117,30 @@ class MainActivity : ComponentActivity() {
                     if (isReady) {
                         Box(modifier = Modifier.fillMaxSize()) {
                             PdfReaderNavGraph(startDestination = startDestination)
+                            SnackbarHost(
+                                hostState = snackbarHostState,
+                                modifier = Modifier.padding(horizontal = 16.dp)
+                            )
                         }
                     }
                 }
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        updateService.checkForUpdate()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateService.handleResume()
+    }
+
+    override fun onDestroy() {
+        updateService.dispose()
+        super.onDestroy()
     }
 
     /**

@@ -129,7 +129,9 @@ fun PdfListItem(
             PdfThumbnail(
                 size = 52.dp,
                 pdfPath = pdfFile.path,
-                pageCount = pdfFile.pageCount.takeIf { it > 0 }
+                pageCount = pdfFile.pageCount.takeIf { it > 0 },
+                isPdf = pdfFile.isPdf,
+                fileTypeLabel = pdfFile.extensionLabel
             )
 
             Spacer(modifier = Modifier.width(14.dp))

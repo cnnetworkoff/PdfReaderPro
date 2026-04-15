@@ -162,6 +162,8 @@ dependencies {
 
     // webkit for PDF rendering
     implementation(libs.androidx.webkit)
+    implementation(libs.play.app.update)
+    implementation(libs.play.app.update.ktx)
 
     // iText PDF processing
     implementation(libs.itext.core) {

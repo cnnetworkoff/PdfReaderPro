@@ -118,7 +118,9 @@ fun PdfGridItem(
                 PdfThumbnailGrid(
                     modifier = Modifier.fillMaxWidth(),
                     pdfPath = pdfFile.path,
-                    pageCount = pdfFile.pageCount.takeIf { it > 0 }
+                    pageCount = pdfFile.pageCount.takeIf { it > 0 },
+                    isPdf = pdfFile.isPdf,
+                    fileTypeLabel = pdfFile.extensionLabel
                 )
 
                 // Options button or Selection checkbox

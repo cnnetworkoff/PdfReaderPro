@@ -53,6 +53,7 @@ import androidx.navigation.NavController
 import com.pdfreader.cn.presentation.components.pdf.PdfViewer
 import com.pdfreader.cn.presentation.components.pdf.print.DefaultPdfPrintAdapter
 import com.pdfreader.cn.presentation.screens.reader.components.DeleteConfirmDialog
+import com.pdfreader.cn.presentation.screens.reader.components.EditOptionsSheet
 import com.pdfreader.cn.presentation.screens.reader.components.EnhancedTableOfContents
 import com.pdfreader.cn.presentation.screens.reader.components.ErrorState
 import com.pdfreader.cn.presentation.screens.reader.components.FloatingControlBar
@@ -73,6 +74,7 @@ import com.pdfreader.cn.presentation.screens.reader.components.AutoScrollSheet
 import com.pdfreader.cn.presentation.screens.reader.components.AutoScrollOverlay
 import com.pdfreader.cn.presentation.screens.reader.components.TopBarMenuPanel
 import com.pdfreader.cn.presentation.screens.reader.components.RemoveFavoriteSheet
+import com.pdfreader.cn.presentation.navigation.navigateToTools
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -444,6 +446,7 @@ fun ReaderScreen(
                         onViewClick = { viewModel.onAction(ReaderAction.ShowViewModeSheet) },
                         onZoomClick = { viewModel.onAction(ReaderAction.ShowZoomSheet) },
                         onDisplayClick = { viewModel.onAction(ReaderAction.ShowDisplaySheet) },
+                        onEditClick = { viewModel.onAction(ReaderAction.ShowEditOptionsSheet) },
                         onBookmarkClick = { viewModel.onAction(ReaderAction.TogglePageBookmark) },
                         onMoreClick = { viewModel.onAction(ReaderAction.ShowMoreOptionsSheet) },
                         isDarkMode = isDarkMode
@@ -607,6 +610,9 @@ fun ReaderScreen(
             onGoToPageClick = {
                 viewModel.onAction(ReaderAction.ShowPageJumpDialog)
             },
+            onToolsClick = {
+                navController.navigateToTools()
+            },
             onShareClick = {
                 viewModel.onAction(ReaderAction.ShareDocument)
             },
@@ -617,6 +623,24 @@ fun ReaderScreen(
                 viewModel.onAction(ReaderAction.ShowInfoDialog)
             },
             onDismiss = { viewModel.onAction(ReaderAction.HideMoreOptionsSheet) }
+        )
+    }
+
+    if (state.isEditOptionsSheetVisible) {
+        EditOptionsSheet(
+            isHighlightModeActive = state.isHighlightModeActive,
+            isTextInsertModeActive = state.isTextInsertModeActive,
+            isDrawModeActive = state.isDrawModeActive,
+            isStampModeActive = state.isStampModeActive,
+            hasUnsavedEdits = state.hasUnsavedEdits,
+            onHighlightClick = { viewModel.onAction(ReaderAction.EnableHighlightMode) },
+            onTextInsertClick = { viewModel.onAction(ReaderAction.EnableTextInsertMode) },
+            onDrawClick = { viewModel.onAction(ReaderAction.EnableDrawMode) },
+            onStampClick = { viewModel.onAction(ReaderAction.EnableStampMode) },
+            onUndoClick = { viewModel.onAction(ReaderAction.UndoEditAction) },
+            onRedoClick = { viewModel.onAction(ReaderAction.RedoEditAction) },
+            onDoneClick = { viewModel.onAction(ReaderAction.DisableEditModes) },
+            onDismiss = { viewModel.onAction(ReaderAction.HideEditOptionsSheet) }
         )
     }
 

@@ -1,13 +1,5 @@
 package com.pdfreader.cn.presentation.screens.onboarding
 
-import android.Manifest
-import android.content.Intent
-import android.net.Uri
-import android.os.Build
-import android.os.Environment
-import android.provider.Settings
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
@@ -50,7 +42,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -71,10 +62,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.Lifecycle
 import com.pdfreader.cn.R
-import androidx.lifecycle.compose.LocalLifecycleOwner
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import com.pdfreader.cn.presentation.navigation.Home
 import kotlinx.coroutines.launch
@@ -275,9 +263,7 @@ fun OnboardingScreen(
     navController: NavController,
     onOnboardingComplete: () -> Unit
 ) {
-    val context = LocalContext.current
     val scope = rememberCoroutineScope()
-    val lifecycleOwner = LocalLifecycleOwner.current
     val onboardingPages = getOnboardingPages()
 
     val pagerState = rememberPagerState(
@@ -287,29 +273,6 @@ fun OnboardingScreen(
 
     val currentPage by remember { derivedStateOf { pagerState.currentPage } }
     val isLastPage = currentPage == onboardingPages.size - 1
-
-    var waitingForManagePermission by remember { mutableStateOf(false) }
-
-    val legacyPermissionLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.RequestMultiplePermissions()
-    ) { _ ->
-        onOnboardingComplete()
-        navController.navigate(Home) {
-            popUpTo(0) { inclusive = true }
-        }
-    }
-
-    LaunchedEffect(lifecycleOwner) {
-        lifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-            if (waitingForManagePermission) {
-                waitingForManagePermission = false
-                onOnboardingComplete()
-                navController.navigate(Home) {
-                    popUpTo(0) { inclusive = true }
-                }
-            }
-        }
-    }
 
     // Animated values for current page
     val currentAccentColor by animateColorAsState(
@@ -696,23 +659,9 @@ fun OnboardingScreen(
                     Button(
                         onClick = {
                             if (isLastPage) {
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                                    if (Environment.isExternalStorageManager()) {
-                                        onOnboardingComplete()
-                                        navController.navigate(Home) {
-                                            popUpTo(0) { inclusive = true }
-                                        }
-                                    } else {
-                                        onOnboardingComplete()
-                                        navController.navigate(Home) {
-                                            popUpTo(0) { inclusive = true }
-                                        }
-                                    }
-                                } else {
-                                    onOnboardingComplete()
-                                    navController.navigate(Home) {
-                                        popUpTo(0) { inclusive = true }
-                                    }
+                                onOnboardingComplete()
+                                navController.navigate(Home) {
+                                    popUpTo(0) { inclusive = true }
                                 }
                             } else {
                                 scope.launch {
@@ -748,33 +697,6 @@ fun OnboardingScreen(
                         }
                     }
 
-                    if (isLastPage) {
-                        Spacer(modifier = Modifier.height(12.dp))
-                        TextButton(
-                            onClick = {
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                                    waitingForManagePermission = true
-                                    val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION).apply {
-                                        data = Uri.parse("package:${context.packageName}")
-                                    }
-                                    context.startActivity(intent)
-                                } else {
-                                    legacyPermissionLauncher.launch(
-                                        arrayOf(
-                                            Manifest.permission.READ_EXTERNAL_STORAGE,
-                                            Manifest.permission.WRITE_EXTERNAL_STORAGE
-                                        )
-                                    )
-                                }
-                            }
-                        ) {
-                            Text(
-                                text = stringResource(R.string.enable_device_wide_pdf_access),
-                                color = currentAccentColor,
-                                fontWeight = FontWeight.Medium
-                            )
-                        }
-                    }
                 }
             }
         }

@@ -1,5 +1,9 @@
 package com.pdfreader.cn.presentation.screens.home
 
+import android.app.Activity
+import androidx.activity.compose.BackHandler
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
@@ -37,7 +41,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -62,6 +65,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -78,6 +82,7 @@ import com.pdfreader.cn.presentation.components.CollapsingHomeHeader
 import com.pdfreader.cn.presentation.components.CompactTabRow
 import com.pdfreader.cn.presentation.components.FileOptionsSheet
 import com.pdfreader.cn.presentation.components.FolderOptionsSheet
+import com.pdfreader.cn.presentation.components.PermissionBottomSheet
 import com.pdfreader.cn.presentation.components.SortOptionsSheet
 import com.pdfreader.cn.presentation.components.StatsSheet
 import com.pdfreader.cn.presentation.components.dialogs.DeleteConfirmSheet
@@ -95,12 +100,8 @@ import com.pdfreader.cn.presentation.screens.home.tabs.RecentTab
 import com.pdfreader.cn.presentation.screens.settings.SettingsScreenContent
 import com.pdfreader.cn.presentation.screens.tools.ToolsScreen
 import com.pdfreader.cn.util.FileOperations
-import android.app.Activity
-import android.content.Intent
-import android.net.Uri
-import android.os.Build
-import android.os.Environment
-import android.provider.Settings
+import com.pdfreader.cn.util.StoragePermissionHelper
+import com.pdfreader.cn.util.DocumentIntents
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
@@ -130,52 +131,27 @@ fun HomeScreen(
     viewModel: HomeViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
-    val scope = rememberCoroutineScope()
     val lifecycleOwner = LocalLifecycleOwner.current
-
-    // Permission state that updates on lifecycle resume
+    val scope = rememberCoroutineScope()
     var hasPermission by remember {
-        mutableStateOf(
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                Environment.isExternalStorageManager()
-            } else true
-        )
+        mutableStateOf(StoragePermissionHelper.hasStoragePermission(context))
     }
+    var showPermissionSheet by rememberSaveable { mutableStateOf(false) }
 
-    // Track if this is the first resume (initial launch)
-    var isFirstResume by remember { mutableStateOf(true) }
-
-    // Re-check permission and do silent refresh on resume
-    DisposableEffect(lifecycleOwner) {
-        val observer = LifecycleEventObserver { _, event ->
-            if (event == Lifecycle.Event.ON_RESUME) {
-                val newPermissionState = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    Environment.isExternalStorageManager()
-                } else true
-
-                if (newPermissionState && !hasPermission) {
-                    // Permission was just granted, refresh data
-                    viewModel.refresh()
-                } else if (newPermissionState && !isFirstResume) {
-                    // App resumed from background with permission, do silent refresh
-                    viewModel.silentRefresh()
-                }
-                hasPermission = newPermissionState
-                isFirstResume = false
-            }
-        }
-        lifecycleOwner.lifecycle.addObserver(observer)
-        onDispose {
-            lifecycleOwner.lifecycle.removeObserver(observer)
+    val permissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        hasPermission = permissions.values.all { it }
+        if (hasPermission) {
+            viewModel.refresh()
         }
     }
 
-    val openPermissionSettings = {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION).apply {
-                data = Uri.parse("package:${context.packageName}")
-            }
-            context.startActivity(intent)
+    val requestStoragePermission = {
+        if (StoragePermissionHelper.shouldUseManageAllFilesAccess()) {
+            showPermissionSheet = true
+        } else {
+            permissionLauncher.launch(StoragePermissionHelper.requiredLegacyPermissions())
         }
     }
 
@@ -205,6 +181,28 @@ fun HomeScreen(
     LaunchedEffect(homeSubTabPagerState.currentPage) {
         if (isSelectionMode && selectedPaths.isNotEmpty()) {
             viewModel.clearSelectedItems()
+        }
+    }
+
+    DisposableEffect(lifecycleOwner, hasPermission) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_RESUME) {
+                val permissionGranted = StoragePermissionHelper.hasStoragePermission(context)
+                val wasGranted = hasPermission
+                hasPermission = permissionGranted
+                if (permissionGranted) {
+                    if (!wasGranted) {
+                        viewModel.refresh()
+                    } else {
+                        viewModel.silentRefresh()
+                    }
+                }
+            }
+        }
+
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
         }
     }
 
@@ -354,7 +352,12 @@ fun HomeScreen(
                                         isRefreshing = isRefreshing,
                                         hasPermission = hasPermission,
                                         onFileClick = { recent ->
-                                            navController.navigateToReader(recent.path, recent.lastPage)
+                                            val file = allFiles.find { it.path == recent.path }
+                                            if (file == null || file.isPdf) {
+                                                navController.navigateToReader(recent.path, recent.lastPage)
+                                            } else {
+                                                DocumentIntents.openDocument(context, file)
+                                            }
                                         },
                                         onFileOptionsClick = { recent ->
                                             allFiles.find { it.path == recent.path }?.let { pdf ->
@@ -371,7 +374,7 @@ fun HomeScreen(
                                             }
                                         },
                                         onRefresh = { viewModel.refresh() },
-                                        onGrantPermissionClick = openPermissionSettings,
+                                        onGrantPermissionClick = requestStoragePermission,
                                         isSelectionMode = isSelectionMode,
                                         selectedPaths = selectedPaths,
                                         onSelectionToggle = { recent ->
@@ -391,7 +394,11 @@ fun HomeScreen(
                                         isRefreshing = isRefreshing,
                                         hasPermission = hasPermission,
                                         onFileClick = { pdf ->
-                                            navController.navigateToReader(pdf.path)
+                                            if (pdf.isPdf) {
+                                                navController.navigateToReader(pdf.path)
+                                            } else {
+                                                DocumentIntents.openDocument(context, pdf)
+                                            }
                                         },
                                         onFileOptionsClick = { pdf ->
                                             selectedFile = pdf
@@ -404,7 +411,7 @@ fun HomeScreen(
                                             }
                                         },
                                         onRefresh = { viewModel.refresh() },
-                                        onGrantPermissionClick = openPermissionSettings,
+                                        onGrantPermissionClick = requestStoragePermission,
                                         isSelectionMode = isSelectionMode,
                                         selectedPaths = selectedPaths,
                                         onSelectionToggle = { pdf ->
@@ -424,7 +431,11 @@ fun HomeScreen(
                                         isRefreshing = isRefreshing,
                                         hasPermission = hasPermission,
                                         onFileClick = { pdf ->
-                                            navController.navigateToReader(pdf.path)
+                                            if (pdf.isPdf) {
+                                                navController.navigateToReader(pdf.path)
+                                            } else {
+                                                DocumentIntents.openDocument(context, pdf)
+                                            }
                                         },
                                         onFileOptionsClick = { pdf ->
                                             selectedFile = pdf
@@ -434,7 +445,7 @@ fun HomeScreen(
                                             }
                                         },
                                         onRefresh = { viewModel.refresh() },
-                                        onGrantPermissionClick = openPermissionSettings,
+                                        onGrantPermissionClick = requestStoragePermission,
                                         isSelectionMode = isSelectionMode,
                                         selectedPaths = selectedPaths,
                                         onSelectionToggle = { pdf ->
@@ -466,7 +477,7 @@ fun HomeScreen(
                                 selectedFolder = folder
                             },
                             onRefresh = { viewModel.refresh() },
-                            onGrantPermissionClick = openPermissionSettings,
+                            onGrantPermissionClick = requestStoragePermission,
                             onSortSelected = { viewModel.setFolderSortOption(it) },
                             onSearchQueryChange = { viewModel.setFolderSearchQuery(it) }
                         )
@@ -661,6 +672,17 @@ fun HomeScreen(
                     // Could show a snackbar here with results
                 }
                 showBatchDeleteConfirm = false
+            }
+        )
+    }
+
+    if (showPermissionSheet) {
+        PermissionBottomSheet(
+            sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+            onDismiss = { showPermissionSheet = false },
+            onGrantClick = {
+                showPermissionSheet = false
+                StoragePermissionHelper.openManageAllFilesSettings(context)
             }
         )
     }

@@ -1,10 +1,5 @@
 package com.pdfreader.cn.presentation.screens.folder
 
-import android.content.Intent
-import android.net.Uri
-import android.os.Build
-import android.os.Environment
-import android.provider.Settings
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
@@ -55,7 +50,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -73,9 +67,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.pdfreader.cn.R
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.navigation.NavController
 import com.pdfreader.cn.domain.model.PdfFile
 import com.pdfreader.cn.domain.model.ViewMode
@@ -92,6 +83,7 @@ import com.pdfreader.cn.presentation.components.dialogs.FileInfoDialog
 import com.pdfreader.cn.presentation.components.dialogs.RenameSheet
 import com.pdfreader.cn.presentation.navigation.navigateToMergeTool
 import com.pdfreader.cn.presentation.navigation.navigateToReader
+import com.pdfreader.cn.util.DocumentIntents
 import com.pdfreader.cn.util.FileOperations
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
@@ -110,34 +102,7 @@ fun FolderDetailScreen(
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
-    val lifecycleOwner = LocalLifecycleOwner.current
-
-    var hasPermission by remember {
-        mutableStateOf(
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                Environment.isExternalStorageManager()
-            } else true
-        )
-    }
-
-    DisposableEffect(lifecycleOwner) {
-        val observer = LifecycleEventObserver { _, event ->
-            if (event == Lifecycle.Event.ON_RESUME) {
-                val newPermissionState = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    Environment.isExternalStorageManager()
-                } else true
-
-                if (newPermissionState && !hasPermission) {
-                    viewModel.loadFilesForFolder(folderPath)
-                }
-                hasPermission = newPermissionState
-            }
-        }
-        lifecycleOwner.lifecycle.addObserver(observer)
-        onDispose {
-            lifecycleOwner.lifecycle.removeObserver(observer)
-        }
-    }
+    val hasPermission = true
 
     val files by viewModel.files.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
@@ -200,14 +165,7 @@ fun FolderDetailScreen(
             when {
                 !hasPermission -> {
                     PermissionRequiredState(
-                        onGrantClick = {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                                val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION).apply {
-                                    data = Uri.parse("package:${context.packageName}")
-                                }
-                                context.startActivity(intent)
-                            }
-                        }
+                        onGrantClick = {}
                     )
                 }
                 isLoading && files.isEmpty() -> {
@@ -253,7 +211,11 @@ fun FolderDetailScreen(
                                         if (isSelectionMode) {
                                             viewModel.toggleSelection(file.path)
                                         } else {
-                                            navController.navigateToReader(file.path)
+                                            if (file.isPdf) {
+                                                navController.navigateToReader(file.path)
+                                            } else {
+                                                DocumentIntents.openDocument(context, file)
+                                            }
                                         }
                                     },
                                     onOptionsClick = {
@@ -291,7 +253,11 @@ fun FolderDetailScreen(
                                         if (isSelectionMode) {
                                             viewModel.toggleSelection(file.path)
                                         } else {
-                                            navController.navigateToReader(file.path)
+                                            if (file.isPdf) {
+                                                navController.navigateToReader(file.path)
+                                            } else {
+                                                DocumentIntents.openDocument(context, file)
+                                            }
                                         }
                                     },
                                     onOptionsClick = {

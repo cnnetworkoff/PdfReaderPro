@@ -1322,5 +1322,25 @@
     <string name="validation_color_invalid">Invalid color value</string>
     <string name="validation_color_range">Color value must be 0-255</string>
     <string name="password_min_hint">Minimum 4 characters required</string>
+    <string name="edit_tools">Edit Tools</string>
+    <string name="edit_actions">Edit Actions</string>
+    <string name="highlight_text">Highlight Text</string>
+    <string name="highlight_text_desc">Mark important lines directly in the document</string>
+    <string name="insert_text">Insert Text</string>
+    <string name="insert_text_desc">Place free text notes anywhere on the page</string>
+    <string name="draw_annotation">Draw</string>
+    <string name="draw_annotation_desc">Add freehand marks and signatures</string>
+    <string name="add_stamp">Add Stamp</string>
+    <string name="add_stamp_desc">Insert image-style stamps into the PDF</string>
+    <string name="edit_mode_active">Currently active</string>
+    <string name="undo">Undo</string>
+    <string name="redo">Redo</string>
+    <string name="done_editing">Done Editing</string>
+    <string name="done_editing_desc">Turn off editing tools and keep your changes ready to save</string>
+    <string name="edit_mode_off_desc">Close all annotation tools</string>
+    <string name="undo_last_edit">Undo the last annotation change</string>
+    <string name="redo_last_edit">Redo the last undone change</string>
+    <string name="open_pdf_tools_hub">Open the full PDF tools section</string>
+    <string name="cd_forward">Forward</string>
 
 </resources>
